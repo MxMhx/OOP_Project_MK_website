@@ -7,7 +7,7 @@ export default function CategoryBar(props) {
 
   return (
     <div className="font-kanit">
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center relative">
         {categoriesData &&
           categoriesData.map((category, index) => {
             const handleSubmit = (category) => {

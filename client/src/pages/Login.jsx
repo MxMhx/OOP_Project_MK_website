@@ -4,7 +4,7 @@ import FilterBar from "../components/Filter";
 export default function Login() {
   return (
     <div className="font-kanit">
-      <FilterBar title="เข้าสู่ระบบ" />
+      {/* <FilterBar title="เข้าสู่ระบบ" />
       <div className="flex justify-center mt-5">
         <div className="w-1/3 h-max p-5 rounded-lg">
           <h3 className="pt-4 text-2xl text-center">เข้าสู่ระบบ</h3>
@@ -49,6 +49,15 @@ export default function Login() {
             </a>
           </div>
         </div>
+      </div> */}
+      <div className="flex justify-center w-1/2 h-1/2 shadow-xl rounded-md">
+        <div className="flex flex-col">
+          <h1>Title</h1>
+          <h1>Author</h1>
+          <p>Ohm</p>
+          <h1>Level</h1>
+        </div>
+        <div className="flex flex-col"></div>
       </div>
     </div>
   );

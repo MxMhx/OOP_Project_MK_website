@@ -6,4 +6,4 @@ star react web app
 start fast api
 
 - cd backend
-- nvicorn main:app --reload
+- uvicorn main:app --reload

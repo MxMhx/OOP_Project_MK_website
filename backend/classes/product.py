@@ -1,4 +1,5 @@
-class Category_Menu():
+import jsons
+class ProductCategory():
     def __init__(self, name, image_url):
         self.name = name
         self.image_url = image_url
@@ -7,22 +8,26 @@ class Category_Menu():
     def add_product(self, product):
         self.product.append(product)
 
+    def get_product(self, id):
+        for product in self.product:
+            if product.id == id:
+                return product
+
 class Product():
-    def __init__(self, name, image_url, price, description, calories, category, type):
+    id_count = 0
+    def __init__(self, name, image_url, price, description, calories, type):
+        self.id = Product.id_count
         self.name = name
         self.image_url = image_url
         self.price = price
         self.description = description
         self.calories = calories
-        self.category = category
         self.type = type
-        self.option_product = []
+        self.option = []
+        Product.id_count += 1
     
     def add_product_option(self, option_product):
         self.option_production.append(option_product)
-
-    def __str__(self):
-        return ""
 
 class Product_Option():
     def __init__(self, name, image_url):
@@ -36,16 +41,17 @@ class Cart_item():
 
 class Cart():
     def __init__(self):
-        self.cart_item = []
+        self.cart_items = []
         self.total_cost = 0
         self.shipping_cost = 0
     
-    def add_cart_item(self,cart_item):
-        self.cart_item.append(cart_item)
+    def add_cart_item(self, product, quantity):
+        cart_item = Cart_item(product, quantity)
+        self.cart_items.append(cart_item)
+        self.calculate_cost(cart_item)
 
-    def calculate_cost(self):
+    def remove_item(self):
         pass
 
-    def show_cart(self):
-        for i in self.cart_item:
-            print('[Name : ' + i.product.name + ', Price : ' +  str(i.product.price) + ', Quantity : ' + str(i.quantity) + '],')
+    def calculate_cost(self, cart_item):
+        self.total_cost += cart_item.product.price * cart_item.quantity

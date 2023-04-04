@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { productData } from "../static/data";
 import CategoryBar from "../components/CategoryBar";
@@ -9,6 +10,12 @@ const Category = () => {
   const productfilter = productData.filter(
     (product) => product.category === category
   );
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/${category}")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  });
 
   return (
     <div className="font-kanit">

@@ -256,34 +256,42 @@ export const filterlist = [
 export const slideImages = [
   {
     url: "https://www.mk1642.com/getattachment/2eef9e95-2dd4-4cff-a686-a6ef724a7a8c/4130.aspx",
+    surl: "https://www.mk1642.com/getattachment/d73b1575-2d31-4beb-847e-856f23481a8f/4130.aspx",
     caption: "Slide 1",
   },
   {
     url: "https://www.mk1642.com/getattachment/d51640fc-69b2-42cc-a16f-50d5cb117da6/3978.aspx",
+    surl: "https://www.mk1642.com/getattachment/99f493c4-829a-43d5-aa7d-364b79c35056/3978.aspx",
     caption: "Slide 2",
   },
   {
     url: "https://www.mk1642.com/getattachment/32d12fd3-7178-4691-8ac6-cebbe7ef0999/3977.aspx",
+    surl: "https://www.mk1642.com/getattachment/10d3d87c-8190-4d95-a12b-f97f8a653938/3977.aspx",
     caption: "Slide 3",
   },
   {
     url: "https://www.mk1642.com/getattachment/3050a40b-aa47-41e2-97ca-698f8bc295f4/3976.aspx",
+    surl: "https://www.mk1642.com/getattachment/dc522d1e-4322-40e1-8451-bceba4d91932/3976.aspx",
     caption: "Slide 4",
   },
   {
-    url: "https://www.mk1642.com/getattachment/d6901e6f-073c-4289-8792-e9561d7c8927/3932.aspx",
+    url: "https://www.mk1642.com/getattachment/5d613a39-27dc-4b98-be61-86105c4cca57/3965.aspx",
+    surl: "https://www.mk1642.com/getattachment/59c9baf2-bc60-4a2e-b873-a8d275d3ded7/3965.aspx",
     caption: "Slide 5",
   },
   {
     url: "https://www.mk1642.com/getattachment/5d613a39-27dc-4b98-be61-86105c4cca57/3965.aspx",
+    surl: "https://www.mk1642.com/getattachment/59c9baf2-bc60-4a2e-b873-a8d275d3ded7/3965.aspx",
     caption: "Slide 6",
   },
   {
     url: "https://www.mk1642.com/getattachment/20d08757-2ab7-47c4-86e8-f6f44c20cd5e/3956.aspx",
+    surl: "https://www.mk1642.com/getattachment/67d97656-1de8-48fc-a45c-6604e3dc0592/3956.aspx",
     caption: "Slide 7",
   },
   {
     url: "https://www.mk1642.com/getattachment/436bb941-aacf-47bb-8f40-7c1865fe1465/4050.aspx",
+    surl: "https://www.mk1642.com/getattachment/bf39522a-26d0-4c45-88a4-598d83633963/4050.aspx",
     caption: "Slide 8",
   },
 ];
