@@ -3,9 +3,15 @@ from enum import Enum
 
 class Account:
     def __init__(self, email, password, status = "ACTIVE"):
-        self.email = email
-        self.password = password
-        self.status = status
+        self._email = email
+        self._password = password
+        self._status = status
+
+    def get_email(self):
+        return(self._email)
+    
+    def get_password(self):
+        return(self._password)
         
 
 class AccountStatus(Enum):
@@ -18,16 +24,10 @@ class User:
     id_count = 0
     def __init__(self, name, phone, account):
         self.id = User.id_count
-        self.name = name
-        self.phone = phone
-        self.accounts = account
+        self._name = name
+        self._phone = phone
+        self._accounts = account
         User.id_count += 1
-
-    def verify_login(self, email, password):
-        if self.account.email == email and self.account.password == password:
-            return True
-        else:
-            return False
 
     def edit_profile(self):
         pass

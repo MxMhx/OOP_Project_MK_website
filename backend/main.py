@@ -71,3 +71,12 @@ async def register(data:dict)->dict:
     dt = {}
     dt[user.id] = user
     return {"Data": dt}
+
+@app.post("/login")
+async def login(data:dict):
+    email_d = data["email"]
+    password_d = data["password"]
+
+    check_d = mk.login(email_d,password_d)
+
+    return(check_d)
