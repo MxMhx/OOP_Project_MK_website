@@ -29,9 +29,7 @@ class MkDelivery():
     def login(self,email,password):
         for user in self.__user_list:
             if email == user._accounts.get_email() and password == user._accounts.get_password():
-                # print("true")
                 return True
             else:
-                # print("false")
                 return False
-            
+        
