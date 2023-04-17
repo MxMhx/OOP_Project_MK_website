@@ -160,16 +160,6 @@ export const productData = [
     calories: "2400",
     category: "โปรโมชั่น",
   },
-  {
-    id: 12,
-    name: "ชุดอร่อยสุดคุ้ม",
-    imageUrl:
-      "https://www.mk1642.com/getattachment/6307e466-7587-4048-84d9-2cc7a305e837/3975.aspx",
-    price: 559,
-    description: "จากปกติ 799",
-    calories: "1300",
-    category: "โปรโมชั่น",
-  },
 ];
 
 export const filterlist = [
@@ -251,6 +241,10 @@ export const filterlist = [
     title: "สร้างบัญชี",
     content: [],
   },
+  {
+    title: "โปรไฟล์",
+    content: [],
+  },
 ];
 
 export const slideImages = [
@@ -260,23 +254,23 @@ export const slideImages = [
     caption: "Slide 1",
   },
   {
-    url: "https://www.mk1642.com/getattachment/d51640fc-69b2-42cc-a16f-50d5cb117da6/3978.aspx",
-    surl: "https://www.mk1642.com/getattachment/99f493c4-829a-43d5-aa7d-364b79c35056/3978.aspx",
+    url: "https://www.mk1642.com/getattachment/05fce9bf-dcfc-49bb-ac19-7064d7d9f86e/4161.aspx",
+    surl: "https://www.mk1642.com/getattachment/ef7b52c0-7af5-4164-8055-cf59b64e6192/4161.aspx",
     caption: "Slide 2",
   },
   {
-    url: "https://www.mk1642.com/getattachment/32d12fd3-7178-4691-8ac6-cebbe7ef0999/3977.aspx",
-    surl: "https://www.mk1642.com/getattachment/10d3d87c-8190-4d95-a12b-f97f8a653938/3977.aspx",
+    url: "https://www.mk1642.com/getattachment/dd2336ee-61cf-4f4f-9fa1-a89ae26304b7/4145.aspx",
+    surl: "https://www.mk1642.com/getattachment/05d233e8-ecf8-42f8-9b03-f0e36f2ad7c5/4145.aspx",
     caption: "Slide 3",
   },
   {
-    url: "https://www.mk1642.com/getattachment/3050a40b-aa47-41e2-97ca-698f8bc295f4/3976.aspx",
-    surl: "https://www.mk1642.com/getattachment/dc522d1e-4322-40e1-8451-bceba4d91932/3976.aspx",
+    url: "https://www.mk1642.com/getattachment/d22d528c-e071-4e86-aa73-7fe1773ceac2/4144.aspx",
+    surl: "https://www.mk1642.com/getattachment/81b94880-8c7f-4bea-8b9c-11aaf5a32598/4144.aspx",
     caption: "Slide 4",
   },
   {
-    url: "https://www.mk1642.com/getattachment/d6901e6f-073c-4289-8792-e9561d7c8927/3932.aspx",
-    surl: "https://www.mk1642.com/getattachment/17bf98bc-d2a0-4a44-8897-15f1c6ce04f3/3932.aspx",
+    url: "https://www.mk1642.com/getattachment/5d613a39-27dc-4b98-be61-86105c4cca57/3965.aspx",
+    surl: "https://www.mk1642.com/getattachment/59c9baf2-bc60-4a2e-b873-a8d275d3ded7/3965.aspx",
     caption: "Slide 5",
   },
   {

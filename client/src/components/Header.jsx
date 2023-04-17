@@ -1,5 +1,20 @@
+import React, { useState, useEffect, useContext } from "react";
+import Cart from "../components/Cart";
+import axios from "axios";
+import AuthContext from "../context/auth";
+
 function Header() {
   var delivery = true;
+  const [show, setShow] = useState(false);
+  const [cart, setCart] = useState([]);
+  const showCart = () => setShow(true);
+  const hideCart = () => setShow(false);
+  const { isLogin } = useContext(AuthContext);
+
+  useEffect(() => {
+    axios.get("/cart/get").then((res) => setCart(res.data));
+  }, []);
+
   return (
     <div className="text-white font-kanit">
       <div className="bg-red flex justify-center">
@@ -75,22 +90,36 @@ function Header() {
             )}
           </div>
           <div className="">
-            <a href="/login" className="hidden lg:block text-sm">
-              เข้าสู่ระบบ/ลงทะเบียน
-            </a>
-            <div className="lg:flex items-center justify-end mt-1">
+            {isLogin ? (
+              <a href="/profile">profile</a>
+            ) : (
+              <a href="/login" className="hidden lg:block text-sm">
+                เข้าสู่ระบบ/ลงทะเบียน
+              </a>
+            )}
+            <div
+              className="lg:flex items-center justify-end mt-1 hover:cursor-pointer"
+              onClick={(e) => {
+                showCart();
+              }}
+            >
               <div className="relative">
                 <img
                   src="https://www.mk1642.com/App_Themes/Source/images/ico/Group-1610.png"
                   alt="cart_logo"
                 />
-                <p className="absolute left-6 top-4 text-sm">0</p>
+                <p className="absolute left-6 top-4 text-sm">
+                  {cart.amount === null ? 0 : cart.amount}
+                </p>
               </div>
-              <p className="ml-5 font-semibold">0 .-</p>
+              <p className="ml-5 font-semibold">
+                {cart.total_cost === null ? 0 : cart.total_cost} .-
+              </p>
             </div>
           </div>
         </div>
       </div>
+      {show && <Cart show={show} handleClose={hideCart} cart={cart} />}
     </div>
   );
 
@@ -98,14 +127,12 @@ function Header() {
     var btn = document.getElementById("btnn");
     btn.style.left = "0";
     delivery = true;
-    console.log(delivery);
   }
 
   function rightClick() {
     var btn = document.getElementById("btnn");
     btn.style.left = "50%";
     delivery = false;
-    console.log(delivery);
   }
 }
 

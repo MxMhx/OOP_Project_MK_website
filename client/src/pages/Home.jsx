@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import CategoryBar from "../components/CategoryBar";
 import ProductCard from "../components/ProductCard";
 import { Slide } from "react-slideshow-image";
-import { slideImages, productData } from "../static/data";
+import { slideImages } from "../static/data";
 import "react-slideshow-image/dist/styles.css";
 
 function Home() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios.get("/category/โปรโมชั่น").then((res) => setProducts(res.data));
+  }, []);
+
   const Slideshow = () => {
     return (
       <div className="slide-container">
@@ -13,10 +19,18 @@ function Home() {
           {slideImages.map((slideImage, index) => (
             <div key={index}>
               <div className="items-center justify-center bg-cover hidden md:flex">
-                <img src={slideImage.url} className="w-full h-auto" />
+                <img
+                  src={slideImage.url}
+                  className="w-full h-auto"
+                  alt={slideImage.caption}
+                />
               </div>
               <div className="flex items-center justify-center bg-cover md:hidden">
-                <img src={slideImage.surl} className="w-full h-auto" />
+                <img
+                  src={slideImage.surl}
+                  className="w-full h-auto"
+                  alt={slideImage.caption}
+                />
               </div>
             </div>
           ))}
@@ -39,11 +53,13 @@ function Home() {
         </h1>
         <div className="flex justify-center mt-5 w-4/5">
           <div className="grid grid-cols-2">
-            {productData.map((product) => {
+            {products.map((product) => {
               return (
-                product.category === "โปรโมชั่น" && (
-                  <ProductCard product={product} key={product.id} />
-                )
+                <ProductCard
+                  product={product}
+                  category={"โปรโมชั่น"}
+                  key={product.id}
+                />
               );
             })}
           </div>

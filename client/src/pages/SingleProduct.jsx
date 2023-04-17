@@ -1,10 +1,46 @@
 import { useParams } from "react-router-dom";
-import { productData } from "../static/data";
 import CategoryBar from "../components/CategoryBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const SingleProduct = () => {
-  const { id } = useParams();
-  const singleproduct = productData.filter((product) => `${product.id}` === id);
+  const { category, name } = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`/category/${category}/${name}`)
+      .then((res) => setProduct(res.data));
+  }, [category, name]);
+
+  const handleAddToCart = () => {
+    setIsLoading(true);
+    axios
+      .post("/cart/add", {
+        category: category,
+        product: name,
+        quantity: quantity,
+      })
+      .then(() => {
+        setIsLoading(false);
+        setQuantity(1);
+        window.location.reload();
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handlePlus = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleMinus = () => {
+    quantity <= 1 ? setQuantity(1) : setQuantity(quantity - 1);
+  };
+
   return (
     <div className="font-kanit">
       <CategoryBar />
@@ -13,31 +49,39 @@ const SingleProduct = () => {
           <img
             className="rounded-xl"
             width={540}
-            src={singleproduct[0].imageUrl}
-            alt={singleproduct[0].id}
+            src={product.image_url}
+            alt={product.id}
           />
           <div className="flex my-2 items-center justify-end">
             <div className="bg-red w-4 h-4 rounded-full mr-2"></div>
-            <p>{singleproduct[0].calories} kcal.</p>
+            <p>{product.calories} kcal.</p>
           </div>
         </div>
         <div className="mx-5 w-[30%]">
-          <h1 className="font-extrabold text-3xl mb-2">
-            {singleproduct[0].name}
-          </h1>
-          <p>{singleproduct[0].description}</p>
+          <h1 className="font-extrabold text-3xl mb-2">{product.name}</h1>
+          <p>{product.description}</p>
           <div className="flex items-center justify-between mt-9">
             <div className="flex items-center">
               <h1>จำนวน</h1>
-              <button className="border px-2 mx-3 rounded-full" onClick={minus}>
+              <button
+                className="border px-2 mx-3 rounded-full"
+                onClick={handleMinus}
+              >
                 -
               </button>
-              <p id="quantity">1</p>
-              <button className="border px-2 mx-3 rounded-full" onClick={plus}>
+              <p>{quantity}</p>
+              <button
+                className="border px-2 mx-3 rounded-full"
+                onClick={handlePlus}
+              >
                 +
               </button>
             </div>
-            <button className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-between w-[130px]">
+            <button
+              className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-between w-[130px]"
+              onClick={handleAddToCart}
+              disabled={isLoading}
+            >
               +
               <img
                 src="../icon/cart-icon.png"
@@ -45,7 +89,7 @@ const SingleProduct = () => {
                 alt="cart-icon"
               />
               <div className="border-l h-5"></div>
-              {singleproduct[0].price} .-
+              {product.price} .-
             </button>
           </div>
         </div>
@@ -55,16 +99,3 @@ const SingleProduct = () => {
 };
 
 export default SingleProduct;
-
-//plus button function
-function plus() {
-  var quantity = parseInt(document.getElementById("quantity").innerHTML);
-  quantity += 1;
-  document.getElementById("quantity").innerHTML = quantity;
-}
-
-function minus() {
-  var quantity = parseInt(document.getElementById("quantity").innerHTML);
-  quantity -= 1;
-  document.getElementById("quantity").innerHTML = quantity <= 1 ? 1 : quantity;
-}
