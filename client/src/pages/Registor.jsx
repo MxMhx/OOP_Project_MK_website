@@ -1,11 +1,41 @@
+import axios from "axios";
 import FilterBar from "../components/Filter";
+import { useState } from "react";
 
-export default function Registor() {
+export default function Register() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    axios
+      .post("/auth/register", {
+        name: name,
+        email: email,
+        password: password,
+        phone: phone,
+      })
+      .then(() => {
+        setIsLoading(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+        window.location.replace("/login");
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  };
   return (
     <div className="font-kanit">
       <FilterBar title="สร้างบัญชี" />
       <div className="flex justify-center mt-5 w-full h-[550px]">
-        <form className="w-1/3">
+        <form className="w-1/3" onSubmit={(e) => handleRegister(e)}>
           <div className="flex my-5 justify-between">
             <div className="flex flex-col">
               <label>คำนำหน้า</label>
@@ -22,6 +52,8 @@ export default function Registor() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="text"
                 placeholder="ชื่อ"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="flex flex-col">
@@ -40,6 +72,8 @@ export default function Registor() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="text"
                 placeholder="08xxxxxx"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             <div className="flex flex-col w-1/2">
@@ -48,6 +82,8 @@ export default function Registor() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="email"
                 placeholder="อีเมลล์"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -246,6 +282,8 @@ export default function Registor() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="password"
                 placeholder="รหัสผ่าน"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="flex flex-col w-[45%]">
@@ -260,6 +298,7 @@ export default function Registor() {
           <button
             className="px-4 py-2 font-bold text-white bg-red rounded-full hover:bg-third-color focus:outline-none focus:shadow-outline"
             type="submit"
+            disabled={isLoading}
           >
             ลงทะเบียน
           </button>
