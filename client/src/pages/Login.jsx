@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FilterBar from "../components/Filter";
 import axios from "axios";
-import useAuth from "../context/auth";
+import AuthContext from "../context/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
+
+  const { setCookies } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export default function Login() {
         setEmail("");
         setPassword("");
         if (res.data.status !== "Login Failed") {
+          setCookies("token", res.data);
           window.location.replace("/");
         } else {
           setIsInvalid(true);

@@ -1,6 +1,30 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
+import AuthContext from "../context/auth";
 
 export default function Cart(props) {
+  const { cookies } = useContext(AuthContext);
+
+  const handleRemoveItem = async (item) => {
+    axios
+      .delete(`/cart/remove_cart_item/${item.product.name}`, {
+        params: { name: cookies.token },
+      })
+      .then(() => window.location.reload());
+  };
+
+  const handleEditItem = async (item, method) => {
+    item.quantity > 1
+      ? axios
+          .put(`/cart/add_quantity_cart_item/${item.product.name}`, {
+            name: cookies.token,
+            quantity: method === "plus" ? 1 : -1,
+          })
+          .then(() => window.location.reload())
+      : handleRemoveItem(item);
+  };
+
+  const handleCheckOut = () => {};
   return (
     <div className="cart text-darkgray w-[30%] shadow-slate-50 shadow-md fixed z-10 bg-white right-0 top-[140px]">
       <div className="flex bg-[#9C0010] px-3 py-3 text-white text-xl font-bold justify-between items-center">
@@ -12,9 +36,12 @@ export default function Cart(props) {
           &gt;
         </button>
       </div>
-      {props.cart.cart_items.map((item) => {
+      {props.cart.cart_items.map((item, index) => {
         return (
-          <div className="flex px-5 py-3 justify-between items-center">
+          <div
+            className="flex px-5 py-3 justify-between items-center"
+            key={index}
+          >
             <img
               src="https://www.mk1642.com/getattachment/f2af6d3f-b7aa-40bd-8de1-e2ee113575de/4131.aspx"
               width={70}
@@ -22,11 +49,17 @@ export default function Cart(props) {
             />
             <h1 className="w-1/4">{item.product.name}</h1>
             <div className="flex items-center">
-              <button className="border px-2 mx-3 rounded-full" onClick={minus}>
+              <button
+                className="border px-2 mx-3 rounded-full"
+                onClick={() => handleEditItem(item, "minus")}
+              >
                 -
               </button>
               <p id="quantity">{item.quantity}</p>
-              <button className="border px-2 mx-3 rounded-full" onClick={plus}>
+              <button
+                className="border px-2 mx-3 rounded-full"
+                onClick={() => handleEditItem(item, "plus")}
+              >
                 +
               </button>
             </div>
@@ -41,28 +74,11 @@ export default function Cart(props) {
       <div className="flex px-4 py-3 justify-center items-center">
         <button
           className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-center"
-          onClick={checkout}
+          onClick={handleCheckOut}
         >
           ✓ Checkout
         </button>
       </div>
     </div>
   );
-}
-
-//create checkout funcion with api
-function checkout() {
-  console.log("checkout");
-  // console.log("cart");
-}
-function plus() {
-  var quantity = parseInt(document.getElementById("quantity").innerHTML);
-  quantity += 1;
-  document.getElementById("quantity").innerHTML = quantity;
-}
-
-function minus() {
-  var quantity = parseInt(document.getElementById("quantity").innerHTML);
-  quantity -= 1;
-  document.getElementById("quantity").innerHTML = quantity <= 1 ? 1 : quantity;
 }
