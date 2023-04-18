@@ -4,7 +4,6 @@ class MkDelivery():
         self.__user_list = []
         self.__category_list = []
         self.__location_list = []
-        self.__verify_user = User("","",Account("",""),"")
 
     def add_user(self, user):
         self.__user_list.append(user)
@@ -14,12 +13,6 @@ class MkDelivery():
 
     def add_location(self, location):
         self.__location_list.append(location)
-
-    def set_verify_user(self, user):
-        self.__verify_user = user
-
-    def get_verify_user(self):
-        return self.__verify_user
 
     def search_location(self, locate):
         locations = []

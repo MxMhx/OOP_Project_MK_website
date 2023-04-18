@@ -1,9 +1,12 @@
 from fastapi import APIRouter
-from models.user import Customer, Account, User
+from models.user import Customer, Account
 import sys
-
+import jsons
 sys.path.append('/backend/')
 from data import mk
+
+SECRET_KEY = "fUjXnZr4u7x!A%D*G-KaPdSgVkYp3s5v"
+ALGORITHM = "HS256"
 
 router = APIRouter(prefix="/auth", tags=['auth'])
 
@@ -20,17 +23,11 @@ async def register(data: dict)->dict:
     return {"Data": dt}
 
 @router.post("/login")
-def login(data: dict)->dict:
+def login(data: dict):
     email_d = data["email"]
     password_d = data["password"]
     user = mk.get_user(email_d)
     if user is None: return {"status":"Login Failed"}
     if user.get_account().get_password() != password_d: return {"status":"Login Failed"}
     else:
-        mk.set_verify_user(user)
-        return {"status":"Login success", "user":mk.get_verify_user()}
-
-@router.delete("/logout")
-def logout():
-    mk.set_verify_user(User("","",Account("",""),""))
-    return {"status":"Logout Success"}
+        return user._name

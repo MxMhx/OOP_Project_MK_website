@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import CategoryBar from "../components/CategoryBar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import AuthContext from "../context/auth";
 
 const SingleProduct = () => {
   const { category, name } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const { cookies } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -19,6 +21,7 @@ const SingleProduct = () => {
     setIsLoading(true);
     axios
       .post("/cart/add", {
+        name: cookies.token,
         category: category,
         product: name,
         quantity: quantity,
