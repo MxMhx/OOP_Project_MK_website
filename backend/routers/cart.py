@@ -1,8 +1,6 @@
 from fastapi import APIRouter, HTTPException
 import sys
 from models.order import Order
-from models.product import Cart
-
 
 sys.path.append('/backend/')
 from data import mk
@@ -33,7 +31,7 @@ async def add_quantity_product(product_name: str, data: dict):
 
     return mk.get_user(name_d).get_cart()
 
-@router.delete("/remove_cart_item/{product_name}")
+@router.post("/remove_cart_item/{product_name}")
 async def remove_cart_item(product_name: str, name: str):
     mk.get_user(name).get_cart().remove_cart_item(product_name)
 
@@ -41,9 +39,17 @@ async def remove_cart_item(product_name: str, name: str):
 
 
 @router.post("/create_order")
-async def create_order(order: Order):
-    cart_items = Cart.get_items()
-    total_price = sum(item.price for item in cart_items) + 50
-    order.total_price = total_price
-    order.status = "Pending"
-    return {"message": "Order created successfully!", "order_details": order.dict()}
+async def create_order(data: dict) -> dict:
+    username_d = data["username"]
+
+    user = mk.get_user(username_d)
+    address = user.get_address()
+    cart = user.get_cart()
+
+    total_cost = cart.total_cost
+    total_cost += 50 # add shipping cost
+
+    order = Order(address, total_cost, "Pending","Unpaid",username_d)
+    user.add_order(order)
+
+    return {"message": "Order created successfully!"}

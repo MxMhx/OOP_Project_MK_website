@@ -29,6 +29,7 @@ class User:
         self._accounts = account
         self._role = role
         self.__cart = Cart()
+        self.__order = []
         User.id_count += 1
 
     def get_name(self):
@@ -42,11 +43,18 @@ class User:
 
     def get_cart(self):
         return self.__cart
+    
+    def add_order(self,order):
+        self.__order.append(order)
+
 
 class Customer(User):
     def __init__(self, name, phone, account, address = None, role = "customer"):
         super().__init__(name, phone, account, role)
-        self.address = address
+        self._address = address
+
+    def get_address(self):
+        return self._address
 
 class Admin(User):
     def __init__(self, name, phone, account, role = "admin"):
@@ -59,3 +67,4 @@ class Admin(User):
         pass
 
     
+   
