@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from typing import Annotated
+from fastapi import APIRouter, Depends
 from models.user import Customer, Admin, Account
 import sys
 
@@ -15,6 +16,6 @@ mk.add_user(Admin("Tar","0945453453",Account("ohm@gmail.com","123456")))
 def read_user_list():
     return mk.get_all_user()
 
-@router.get("/verify")
-async def read_verify_user():
-    return mk.get_verify_user()
+@router.get("/current")
+async def get_current_user(name: str):
+    return mk.get_user(name)
