@@ -9,11 +9,13 @@ function Header() {
   const [cart, setCart] = useState([]);
   const showCart = () => setShow(true);
   const hideCart = () => setShow(false);
-  const { isLogin } = useContext(AuthContext);
+  const { isLogin, cookies } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("/cart/get").then((res) => setCart(res.data));
-  }, []);
+    axios
+      .get("/cart/get", { params: { name: cookies.token } })
+      .then((res) => setCart(res.data));
+  }, [cookies]);
 
   return (
     <div className="text-white font-kanit">
@@ -69,10 +71,9 @@ function Header() {
             {delivery ? (
               <div className="search-box flex w-full justify-between">
                 <input
-                  className="p-3 h-4 text-xs font-light w-full rounded-l-md"
+                  className="p-3 h-4 text-xs font-light w-full rounded-l-md text-black"
                   type="text"
                   placeholder="ค้นหาสถานที่เพื่อตรวจสอบพื้นที่จัดส่ง"
-                  autoComplete="off"
                 />
                 <div className="search-icon grid bg-gray rounded-r-md place-items-center w-8">
                   <a href="/">
