@@ -41,11 +41,9 @@ async def remove_cart_item(product_name: str, name: str):
 @router.post("/create_order")
 async def create_order(data: dict) -> dict:
     username_d = data["username"]
-
     user = mk.get_user(username_d)
     address = user.get_address()
     cart = user.get_cart()
-
     total_cost = cart.total_cost
     total_cost += 50 # add shipping cost
 
