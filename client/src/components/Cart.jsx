@@ -5,23 +5,21 @@ import AuthContext from "../context/auth";
 export default function Cart(props) {
   const { cookies } = useContext(AuthContext);
 
-  const handleRemoveItem = async (item) => {
-    axios
-      .delete(`/cart/remove_cart_item/${item.product.name}`, {
-        params: { name: cookies.token },
-      })
-      .then(() => window.location.reload());
-  };
-
   const handleEditItem = async (item, method) => {
-    item.quantity > 1
+    item.quantity > 1 || method == "plus"
       ? axios
-          .put(`/cart/add_quantity_cart_item/${item.product.name}`, {
+          .put("/cart/add_quantity_cart_item", {
             name: cookies.token,
+            product: item.product.name,
             quantity: method === "plus" ? 1 : -1,
           })
           .then(() => window.location.reload())
-      : handleRemoveItem(item);
+      : axios
+          .post("/cart/remove_cart_item", {
+            name: cookies.token,
+            product: item.product.name,
+          })
+          .then(() => window.location.reload());
   };
 
   const handleCheckOut = () => {};
