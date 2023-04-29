@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 import sys
-from models.order import Order
 
 sys.path.append('/backend/')
 from data import mk
@@ -23,31 +22,26 @@ async def add_to_cart(data: dict):
     mk.get_user(name_d).get_cart().add_cart_item(mk.get_category(category_d).get_product(product_d), quantity_d)
     return mk.get_user(name_d).get_cart().get_cart_item(product_d)
 
-@router.put("/add_quantity_cart_item/{product_name}")
-async def add_quantity_product(product_name: str, data: dict):
+@router.put("/add_quantity_cart_item")
+async def add_quantity_product(data: dict):
     name_d = data["name"]
+    product_d = data["product"]
     quantity_d = data["quantity"]
-    mk.get_user(name_d).get_cart().increase_quantity(product_name, quantity_d)
+    mk.get_user(name_d).get_cart().increase_quantity(product_d, quantity_d)
 
     return mk.get_user(name_d).get_cart()
 
-@router.post("/remove_cart_item/{product_name}")
-async def remove_cart_item(product_name: str, name: str):
-    mk.get_user(name).get_cart().remove_cart_item(product_name)
+@router.post("/remove_cart_item")
+async def remove_cart_item(data: dict):
+    name_d = data["name"]
+    product_d = data["product"]
+    mk.get_user(name_d).get_cart().remove_cart_item(product_d)
 
-    return mk.get_user(name).get_cart()
+    return mk.get_user(name_d).get_cart()
 
-
-@router.post("/create_order")
-async def create_order(data: dict) -> dict:
-    username_d = data["username"]
-    user = mk.get_user(username_d)
-    address = user.get_address()
-    cart = user.get_cart()
-    total_cost = cart.total_cost
-    total_cost += 50 # add shipping cost
-
-    order = Order(address, total_cost, "Pending","Unpaid",username_d)
-    user.add_order(order)
-
-    return {"message": "Order created successfully!"}
+@router.post("make_payment")
+async def make_payment(data: dict):
+    name_d = data["name"]
+    mk.get_user(name_d).make_payment("PENDING", "12-2-2022", "112222", mk.get_user(name_d).get_order(12))
+    payment = mk.get_user(name_d).get_payment("112222")
+    return payment

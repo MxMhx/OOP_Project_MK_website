@@ -9,8 +9,8 @@ from data import mk
 router = APIRouter(prefix="/user", tags=['user'])
 
 
-mk.add_user(Customer("Ohm","0994448535",Account("ohm@gmail.com","123456"),"Japan"))
-mk.add_user(Admin("Tar","0945453453",Account("ohm@gmail.com","123456")))
+mk.add_user(Customer("Ohm","0994448535", "19-09-2003", Account("ohm@gmail.com","123456"),"Japan"))
+mk.add_user(Admin("admin","0945453453", "24-01-2002",Account("admin@gmail.com","1")))
 
 @router.get("/list")
 def read_user_list():

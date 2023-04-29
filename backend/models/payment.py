@@ -17,7 +17,3 @@ class credit_debit_card(payment) :
         self.Name = Name
         self.Cvv = Cvv
     pass
-
-# class PaymentStatus(enum) :
-#     UNPAID, COMPLETED, DECLINED, CANCELLED \
-#     = 1, 2, 3, 4

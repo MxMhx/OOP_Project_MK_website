@@ -9,7 +9,7 @@ function Header() {
   const [cart, setCart] = useState([]);
   const showCart = () => setShow(true);
   const hideCart = () => setShow(false);
-  const { isLogin, cookies } = useContext(AuthContext);
+  const { isLogin, cookies, isAdmin } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -92,7 +92,11 @@ function Header() {
           </div>
           <div className="">
             {isLogin ? (
-              <a href="/profile">profile</a>
+              isAdmin ? (
+                <a href="/admin">admin</a>
+              ) : (
+                <a href="/profile">profile</a>
+              )
             ) : (
               <a href="/login" className="hidden lg:block text-sm">
                 เข้าสู่ระบบ/ลงทะเบียน

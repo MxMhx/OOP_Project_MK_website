@@ -6,47 +6,50 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [comfirmPass, setComfirmPass] = useState("");
+  const [isInvalid, setIsInvalid] = useState(false);
   const [phone, setPhone] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    axios
-      .post("/auth/register", {
-        name: name,
-        email: email,
-        password: password,
-        phone: phone,
-      })
-      .then(() => {
-        setIsLoading(false);
-        setName("");
-        setEmail("");
-        setPassword("");
-        setPhone("");
-        window.location.replace("/login");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-      });
+    if (password === comfirmPass) {
+      axios
+        .post("/auth/register", {
+          name: name,
+          email: email,
+          password: password,
+          phone: phone,
+          birthday: birthday,
+        })
+        .then(() => {
+          setIsLoading(false);
+          setIsInvalid(false);
+          setName("");
+          setEmail("");
+          setPassword("");
+          setComfirmPass("");
+          setPhone("");
+          setBirthday("");
+          window.location.replace("/login");
+        })
+        .catch((err) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsInvalid(true);
+      setIsLoading(false);
+    }
   };
   return (
     <div className="font-kanit">
       <FilterBar title="สร้างบัญชี" />
       <div className="flex justify-center mt-5 w-full h-[550px]">
         <form className="w-1/3" onSubmit={(e) => handleRegister(e)}>
-          <div className="flex my-5 justify-between">
-            <div className="flex flex-col">
-              <label>คำนำหน้า</label>
-              {/* create select day */}
-              <select className="px-2 py-1 rounded-lg shadow-md">
-                <option value="01">นาย</option>
-                <option value="02">นาง</option>
-                <option value="03">นางสาว</option>
-              </select>
-            </div>
-            <div className="flex flex-col">
+          <div className="flex my-5">
+            <div className="flex flex-col w-full">
               <label>ชื่อ</label>
               <input
                 className="px-2 py-1 rounded-lg shadow-md"
@@ -54,14 +57,6 @@ export default function Register() {
                 placeholder="ชื่อ"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label>นามสกุล</label>
-              <input
-                className="px-2 py-1 rounded-lg shadow-md"
-                type="text"
-                placeholder="นามสกุล"
               />
             </div>
           </div>
@@ -292,7 +287,12 @@ export default function Register() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="password"
                 placeholder="ยืนยันรหัสผ่านใหม่"
+                value={comfirmPass}
+                onChange={(e) => setComfirmPass(e.target.value)}
               />
+              {isInvalid && (
+                <p className="text-red mt-2">กรอกรหัสผ่านใหม่อีกครั้ง</p>
+              )}
             </div>
           </div>
           <button
