@@ -16,7 +16,8 @@ async def register(data: dict)->dict:
     email_d = data["email"]
     password_d = data["password"]
     phone_d = data["phone"]
-    mk.add_user(Customer(name_d, phone_d, Account(email_d, password_d)))
+    birthday_d = data["birthday"]
+    mk.add_user(Customer(name_d, phone_d, birthday_d, Account(email_d, password_d)))
     user = mk.get_user(name_d)
     dt = {}
     dt[user.id] = user

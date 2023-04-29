@@ -1,8 +1,7 @@
+import sys
+sys.path.append('/backend/')
 from fastapi import APIRouter
 from models.product import ProductCategory, Product
-import sys
-
-sys.path.append('/backend/')
 from data import mk
 
 router = APIRouter(prefix="/category", tags=['category'])
@@ -28,6 +27,9 @@ mk.get_category("ชุดสุดคุ้ม").add_product(Product("ชุด
 mk.get_category("สุกี้สด").add_product(Product("ปลาหมึกไข่","https://www.mk1642.com/getmetafile/a271b7f1-576c-44f7-9995-b4b709d15641/%e0%b8%9b%e0%b8%a5%e0%b8%b2%e0%b8%ab%e0%b8%a1%e0%b8%b6%e0%b8%81%e0%b9%84%e0%b8%82%e0%b9%88_419x260.aspx?maxsidesize=1900",159,"แซ่บมากๆ","60","ยำ"))
 mk.get_category("สุกี้สด").add_product(Product("ชุดผักพิเศษ","https://www.mk1642.com/getmetafile/ed53a0a0-c4f2-4018-9ce9-b56d429351ba/%e0%b8%8a%e0%b8%b8%e0%b8%94%e0%b8%9c%e0%b8%b1%e0%b8%81%e0%b8%9e%e0%b8%b4%e0%b9%80%e0%b8%a8%e0%b8%a9_419x260.aspx?maxsidesize=1900",149,"แซ่บมากๆ","20","ยำ"))
 mk.get_category("สุกี้สด").add_product(Product("เนื้อกุ้งสด","https://www.mk1642.com/getmetafile/9e6bb5a8-83c2-456f-a017-171ef223a42c/%e0%b9%80%e0%b8%99%e0%b8%b7%e0%b9%89%e0%b8%ad%e0%b8%81%e0%b8%b8%e0%b9%89%e0%b8%87%e0%b8%aa%e0%b8%94_419x260.aspx?maxsidesize=1900",93,"แซ่บมากๆ","50","ยำ"))
+mk.get_category("เป็ดย่างและอื่นๆ").add_product(Product("เป็ดย่างMK (ตัว)","https://www.mk1642.com/getmetafile/857ff628-ecab-4d49-8a5b-652022a1a308/E-SourceCode-DEV_MK-12-CMS-PictureforWeb-Roasted-R0010.aspx?maxsidesize=1900",782,"แซ่บมากๆ","280","ยำ"))
+mk.get_category("เป็ดย่างและอื่นๆ").add_product(Product("หมูกรอบเล็ก","https://www.mk1642.com/getmetafile/ce5946f2-2ede-4731-a346-ca0f4cd0bc5f/E-SourceCode-DEV_MK-12-CMS-PictureforWeb-Roasted-R0060.aspx?maxsidesize=1900",184,"แซ่บมากๆ","320","ยำ"))
+mk.get_category("เป็ดย่างและอื่นๆ").add_product(Product("เนื้อเปื่อยฮ่องกง (ใหญ่)","https://www.mk1642.com/getmetafile/53773e81-2211-492e-9543-271bee330b4f/E-SourceCode-DEV_MK-12-CMS-PictureforWeb-Roasted-R0190.aspx?maxsidesize=1900",246,"แซ่บมากๆ","290","ยำ"))
 
 @router.get("/")
 def read_categort_list():
