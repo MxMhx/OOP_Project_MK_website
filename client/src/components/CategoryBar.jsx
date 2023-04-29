@@ -1,20 +1,39 @@
-const categorylist = [
-  { image: "./logo192.png", title: "โปรโมชั่น" },
-  { image: "./logo192.png", title: "จานเดี่ยว" },
-  { image: "./logo192.png", title: "ชุดสุดคุ้ม" },
-  { image: "./logo192.png", title: "สุกี้สด" },
-  { image: "./logo192.png", title: "เป็ดย่างและอื่นๆ" },
-  { image: "./logo192.png", title: "ของทานเล่น" },
-];
-function CategoryBar() {
-  const Category = categorylist.map((category) => (
-    <div className="grid place-items-center mx-14 my-2">
-      <img src={category.image} width={50} />
-      <h1>{category.title}</h1>
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function CategoryBar(props) {
+  const navigate = useNavigate();
+  const [categorys, setCategorys] = useState();
+  useEffect(() => {
+    axios.get("/category").then((res) => setCategorys(res.data));
+  }, []);
+  return (
+    <div className="font-kanit">
+      <div className="flex w-full justify-center relative">
+        {categorys &&
+          categorys.map((category, index) => {
+            const handleSubmit = (category) => {
+              navigate(`/${category.name}`);
+            };
+            return (
+              <div
+                key={index}
+                className="grid place-items-center px-10 py-2"
+                style={{
+                  backgroundColor:
+                    props.category === category.name && "#EEEEEE",
+                }}
+                onClick={() => handleSubmit(category)}
+              >
+                <img src={category.image_url} width={60} alt="logo-category" />
+                <h1 className="text-sm font-semibold text-darkgray">
+                  {category.name}
+                </h1>
+              </div>
+            );
+          })}
+      </div>
     </div>
-  ));
-
-  return <div className="flex w-full justify-center">{Category}</div>;
+  );
 }
-
-export default CategoryBar;

@@ -5,11 +5,11 @@ module.exports = {
     colors: {
       red: "#DC0016",
       white: "#FFFFFF",
-      gray: "#D4D4D4",
+      gray: "#EEEEEE",
       black: "#000000",
+      darkgray: "#919191",
     },
     fontFamily: {
-      prompt: "Prompt, sans-serif",
       kanit: "Kanit, sans-serif",
     },
     extend: {},

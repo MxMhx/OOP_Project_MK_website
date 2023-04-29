@@ -1,15 +1,30 @@
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Register from "./pages/Registor";
 import Header from "./components/Header";
-import CategoryBar from "./components/CategoryBar";
-import FilterBar from "./components/Filter";
+import SingleProduct from "./pages/SingleProduct";
+import Category from "./pages/Category";
+import Profile from "./pages/Profile";
+import { AuthProvider } from "./context/auth";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
-    <div className="font-kanit">
-      <Header />
-      <CategoryBar />
-      <FilterBar />
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:category" element={<Category />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registor" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/:category/:name" element={<SingleProduct />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
-
 export default App;
