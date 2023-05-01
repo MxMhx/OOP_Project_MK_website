@@ -1,15 +1,12 @@
-sequenceDiagram register
+sequenceDiagram
     title register
-    participant A as Actor
     participant system
-    participant user as User
-    
-    A ->> system: insert name, email, password, phone number
-    system ->> user: add user
-    user -->> system: return new user
-    system ->> system: update user_list
-    system ->> user: get user data
-    user -->> system: return user data
-    system -->> A: return data
-
-
+    participant user
+    actor A
+    A -> system:insert name,email,password,phone num
+    system -> user :add user
+    user -->>  system :return new user
+    system -> system :update user_list
+    system -> user :get user data
+    user --> system: returen user data
+    system --> A :return data
