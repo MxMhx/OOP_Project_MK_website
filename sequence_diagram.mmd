@@ -1,14 +1,7 @@
-sequenceDiagram
-  participant Client
-  participant Server
-
-  Client->>Server: HTTP POST /register
-  Server->>Application: Create new user(Customer)
-  Application->>Customer: Initialize Customer object
-  Customer->>Account: Initialize Account object
-  Account-->>Customer: Account object
-  Customer-->>Application: Customer object
-  Application->>Database: Add user data to database
-  Database-->>Application: User data added
-  Application->>Customer: Get user object
-  Customer-->>Client: Response Data
+:::mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+:::
