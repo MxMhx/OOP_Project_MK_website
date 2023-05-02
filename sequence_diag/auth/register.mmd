@@ -1,18 +1,18 @@
 sequenceDiagram
     title register
-    actor A
-    participant system
-    participant customer
-    participant account
+    actor user
+    participant MkDelivery
+    participant Customer
+    participant Account
     
-    A ->> system:insert name,email,password,phone num
-    system ->> customer :add user
-    customer ->>  account :create account
-    account ->> account : create new account
-    account -->> customer :return account
-    customer -->> customer :create new user
-    customer --> system: update user list
-    system --> A :show new user
+    user ->> MkDelivery:insert name,email,password,phone num
+    MkDelivery ->> Customer :add user
+    Customer ->>  Account :create account
+    Account ->> Account : create new account
+    Account -->> Customer :return account
+    customer -->> Customer :create new user
+    Customer --> MkDelivery: update user list
+    MkDelivery --> user :show new user
 
 
 
