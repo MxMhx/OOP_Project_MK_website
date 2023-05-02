@@ -4,8 +4,9 @@ sequenceDiagram
     participant system
     participant user
     participant category
-    admin ->> system: send username to
-    system ->> system:add category
-    system --> admin : return category 
-    
+    admin ->> system: send username to add category
+    system ->> category:add category
+    category ->> category:create new category
+    category -->> system : return new category 
+    system -->> admin:show new category
     
