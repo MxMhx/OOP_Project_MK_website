@@ -1,0 +1,11 @@
+sequenceDiagram
+    title add_quantity_cart_item
+    actor a 
+    participant system
+    participant user
+    participant cart 
+    system ->> user :get user(username) 
+    user ->> cart : get cart 
+    cart ->> cart : remove cart item(product name)
+    cart -->> user :update cart 
+    user -->> system: Update User's Cart

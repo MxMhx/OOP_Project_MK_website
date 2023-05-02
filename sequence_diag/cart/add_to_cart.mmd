@@ -1,0 +1,14 @@
+sequenceDiagram
+    title add to cart 
+    actor a 
+    participant system
+    participant user
+    participant cart 
+    a ->> system :press button omn ui
+    system ->> user:get user(username)
+    user -> cart: get cart 
+    cart -> cart :add cart to item
+    cart --> user: update cart 
+    user --> system: return newcart 
+    system --> a :show new cart 
+
