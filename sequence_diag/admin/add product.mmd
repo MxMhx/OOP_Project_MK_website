@@ -2,8 +2,8 @@ sequenceDiagram
     title add product
     actor admin
     participant system
-    participant product
     participant category
+    participant product
     admin ->> system: send username to add product
     system ->> category:get category
     category ->> product:add product
