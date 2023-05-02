@@ -1,11 +1,11 @@
 sequenceDiagram
-    title category
+    title add category
     actor admin
-    participant system
-    participant category
-    admin ->> system: send username to add category
-    system ->> category:add category
-    category ->> category:create new category
-    category -->> system : return new category 
-    system -->> admin:show new category
+    participant MkDelivery
+    participant ProductCategory
+    admin ->> MkDelivery: insert name,imageUrl
+    MkDelivery ->> ProductCategory:add_category
+    ProductCategory ->> ProductCategory:create new category
+    ProductCategory -->> MkDelivery : return new category 
+    MkDelivery -->> admin:show new category
     
