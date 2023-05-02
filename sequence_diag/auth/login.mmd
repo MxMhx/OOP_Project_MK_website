@@ -1,19 +1,21 @@
 sequenceDiagram
     title login
-    actor use
-    participant system
-    participant user
-    use ->> system :insert email password
-    system ->> user :get usert(email)
+    actor user
+    participant MkDelivery
+    participant User
+    user ->> system :insert email,password
+    MkDelivery ->> user :get_usert
     alt User is None
-        user->>system: Login Failed
+        User ->> MkDelivery: Login Failed
     else
         alt Password is wrong
-            user->>system: Login Failed
+            User ->> MkDelivery: Login Failed
         else
-            system-->>use: Return user name
+            User -->> MkDelivery: log in success,Return user name
         end
     end
+    MkDelivery --> user: return username
+
 
 
 
