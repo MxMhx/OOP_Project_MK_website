@@ -1,5 +1,5 @@
 sequenceDiagram
-    title category
+    title add product
     actor admin
     participant system
     participant user
@@ -8,9 +8,9 @@ sequenceDiagram
     system ->> category:get category
     category ->> product:add product
     product ->> product:create new product
-    product --> category:return new product
-    category --> system:return category's new product
-    system --> admin:show new product
+    product -->> category:return new product
+    category -->> system:return category's new product
+    system -->> admin:show new product
 
 
     
