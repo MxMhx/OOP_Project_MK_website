@@ -11,6 +11,20 @@ sequenceDiagram
     order -> a: show order
 
 
+    title add to cart
+    participant system 
+    participant cart
+    actor a 
+    a ->> system:return username
+    system ->> cart:get cart(username)
+    cart ->> cart: add cart item 
+    cart -->> system : return cart 
+    system --> a :show cart 
+
+
+
+
+
 
 
 
