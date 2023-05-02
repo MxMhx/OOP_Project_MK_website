@@ -6,6 +6,6 @@ sequenceDiagram
     participant category
     admin ->> system: send name,email,password,phone,birthday
     system ->> user:add user
-    user --> user : generate new user
-    user --> system: return new user
-    system --> user: return new user
+    user -->> user : generate new user
+    user -->> system: return new user
+    system -->> user: return new user
