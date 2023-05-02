@@ -81,5 +81,3 @@ class Admin(User):
 
     def delete_product():
         pass
-
-    
