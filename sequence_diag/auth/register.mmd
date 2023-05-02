@@ -8,10 +8,11 @@ sequenceDiagram
     A ->> system:insert name,email,password,phone num
     system ->> customer :add user
     customer ->>  account :create account
+    account ->> account : create new account
     account -->> customer :return account
-    customer -->> customer :create new user
-    customer --> system: returen user data
-    system --> A :return user
+    customer -->> customer :return new user
+    customer --> system: udate user list
+    system --> A :show new user
 
 
 
