@@ -1,6 +1,6 @@
 from .product import *
 from enum import Enum
-from .payment import payment
+from .payment import *
 
 class Account:
     def __init__(self, email, password, status = "ACTIVE"):
@@ -31,7 +31,7 @@ class User:
         self._birthday = birthday
         self._role = role
         self.__cart = Cart()
-        self.__payment = []
+        self.__order = []
         User.id_count += 1
 
     def get_name(self):
@@ -46,13 +46,31 @@ class User:
     def get_cart(self):
         return self.__cart
     
-    def make_payment(self, status, date_time, transaction_id, order):
-        self.__payment.append(payment(status, date_time, transaction_id, order))
+    def get_all_order(self):
+        return self.__order
+    
+    def get_order(self, id):
+        for order in self.__order:
+            if order._Order__id == id:
+                return order
+    
+    def add_order(self, order):
+        self.__order.append(order)
+
 
 class Customer(User):
     def __init__(self, name, phone, birthday, account, address = None, role = "customer"):
         super().__init__(name, phone, birthday, account, role)
         self.address = address
+
+    def get_address(self):
+        return self.address
+    
+    def edit_profile(self, name, phone, birthday, address):
+        if name != "": self._name = name
+        if phone != "": self._phone = phone
+        if birthday != "": self._birthday = birthday
+        if address != "": self.address = address
 
 class Admin(User):
     def __init__(self, name, phone, birthday, account, role = "admin"):

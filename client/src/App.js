@@ -8,6 +8,7 @@ import Category from "./pages/Category";
 import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/auth";
 import Admin from "./pages/Admin";
+import History from "./pages/History";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/:category/:name" element={<SingleProduct />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

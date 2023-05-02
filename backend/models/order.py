@@ -1,10 +1,15 @@
 class Order:
-    def __init__(self, Total_Cost, Status, Payment_Status, account):
-        self._Shipping_Address = account._Shipping_Address
-        self._Total_Cost = Total_Cost
-        self._Status = Status
-        self._Payment_Status = Payment_Status
-        self._User_Id = account._Id
+    id_count = 0
+    def __init__(self, address , total_cost, Status):
+        self.__id = Order.id_count
+        self._shipping_Address = address
+        self._total_Cost = total_cost
+        self._status = Status
+        self._payment = None
+        Order.id_count += 1
 
-    def __str__(self):
-        return self._User_Id
+    def make_payment(self, payment):
+        self._payment = payment
+
+    def get_payment(self):
+        return self._payment

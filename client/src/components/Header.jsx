@@ -2,20 +2,39 @@ import React, { useState, useEffect, useContext } from "react";
 import Cart from "../components/Cart";
 import axios from "axios";
 import AuthContext from "../context/auth";
+import Payment from "./Payment";
 
 function Header() {
   var delivery = true;
   const [show, setShow] = useState(false);
   const [cart, setCart] = useState([]);
+  const [order, setOrder] = useState([]);
   const showCart = () => setShow(true);
   const hideCart = () => setShow(false);
   const { isLogin, cookies, isAdmin } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [payment, setPayment] = useState(false);
 
   useEffect(() => {
     axios
       .get("/cart/get", { params: { name: cookies.token } })
       .then((res) => setCart(res.data));
-  }, [cookies]);
+  }, [isLoading]);
+
+  const handleCheckOut = () => {
+    setIsLoading(true);
+    axios
+      .post("/order/create_order", { username: cookies.token })
+      .then((res) => {
+        setIsLoading(false);
+        hideCart();
+        setPayment(true);
+        setOrder(res.data);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div className="text-white font-kanit">
@@ -124,7 +143,14 @@ function Header() {
           </div>
         </div>
       </div>
-      {show && <Cart show={show} handleClose={hideCart} cart={cart} />}
+      {show && (
+        <Cart
+          handleClose={hideCart}
+          cart={cart}
+          handleCheckOut={handleCheckOut}
+        />
+      )}
+      {payment && <Payment handleClose={setPayment} order={order} />}
     </div>
   );
 

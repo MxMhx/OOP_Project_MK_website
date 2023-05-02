@@ -45,7 +45,6 @@ class Cart():
         self.amount = 0
         self.cart_items = []
         self.total_cost = 0
-        self.shipping_cost = 0
     
     def add_cart_item(self, product, quantity):
         cart_item = Cart_item(product, quantity, product.price * quantity)
@@ -76,3 +75,8 @@ class Cart():
                 self.cart_items.remove(item)
         self.calculate_cost()
         self.amount = len(self.cart_items)
+
+    def clear_cart(self):
+        self.amount = 0
+        self.cart_items = []
+        self.total_cost = 0

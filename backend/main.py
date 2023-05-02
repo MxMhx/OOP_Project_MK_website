@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import category, cart, users, auth
+from routers import category, cart, users, auth, order, admin
 from models.user import *
 from data import mk
 
@@ -18,6 +18,8 @@ app.include_router(category.router)
 app.include_router(cart.router)
 app.include_router(users.router)
 app.include_router(auth.router)
+app.include_router(order.router)
+app.include_router(admin.router)
 
 
 @app.get("/")

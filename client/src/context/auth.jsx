@@ -14,10 +14,13 @@ export function AuthProvider({ children }) {
     axios
       .get("/user/current", { params: { name: cookies.token } })
       .then((res) => {
-        res.data._role === "customer" || res.data._role === "admin"
+        res.data[0]?.["_role"] === "customer" ||
+        res.data[0]?.["_role"] === "admin"
           ? setIsLogin(true)
           : setIsLogin(false);
-        res.data._role === "admin" ? setIsAdmin(true) : setIsAdmin(false);
+        res.data[0]?.["_role"] === "admin"
+          ? setIsAdmin(true)
+          : setIsAdmin(false);
       });
   }, [cookies]);
   return (

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from models.order import Order
 import sys
 
 sys.path.append('/backend/')
@@ -38,10 +39,3 @@ async def remove_cart_item(data: dict):
     mk.get_user(name_d).get_cart().remove_cart_item(product_d)
 
     return mk.get_user(name_d).get_cart()
-
-@router.post("make_payment")
-async def make_payment(data: dict):
-    name_d = data["name"]
-    mk.get_user(name_d).make_payment("PENDING", "12-2-2022", "112222", mk.get_user(name_d).get_order(12))
-    payment = mk.get_user(name_d).get_payment("112222")
-    return payment
