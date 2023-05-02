@@ -1,10 +1,14 @@
 sequenceDiagram
     title add user
     actor admin
-    participant system
-    participant user
-    admin ->> system: send name,email,password,phone,birthday
-    system ->> user:add user
-    user -->> user : create new user
-    user -->> system: return new user
-    system -->> admin: show new user
+    participant MkDelivery
+    participant Customer
+    participant Account
+    admin ->> MkDelivery: insert name,email,password,phone,birthday
+    MkDelivery ->> Customer:add user
+    Customer ->> Account: get account
+    Account ->> Account : create account 
+    Account ->> Customer : return account 
+    Customer -->> Customer : create new user
+    Customer -->> MkDelivery: return new user
+    MkDelivery -->> admin: show new user

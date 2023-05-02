@@ -10,8 +10,8 @@ sequenceDiagram
     customer ->>  account :create account
     account ->> account : create new account
     account -->> customer :return account
-    customer -->> customer :return new user
-    customer --> system: udate user list
+    customer -->> customer :create new user
+    customer --> system: update user list
     system --> A :show new user
 
 
