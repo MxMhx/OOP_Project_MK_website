@@ -3,7 +3,7 @@ sequenceDiagram
     actor user
     participant MkDelivery
     participant User
-    user ->> system :insert email,password
+    user ->> MkDelivery :insert email,password
     MkDelivery ->> user :get_usert
     alt User is None
         User ->> MkDelivery: Login Failed
