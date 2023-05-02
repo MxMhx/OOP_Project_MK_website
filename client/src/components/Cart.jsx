@@ -1,30 +1,27 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../context/auth";
 
 export default function Cart(props) {
   const { cookies } = useContext(AuthContext);
 
-  const handleRemoveItem = async (item) => {
-    axios
-      .delete(`/cart/remove_cart_item/${item.product.name}`, {
-        params: { name: cookies.token },
-      })
-      .then(() => window.location.reload());
-  };
-
   const handleEditItem = async (item, method) => {
-    item.quantity > 1
+    item.quantity > 1 || method === "plus"
       ? axios
-          .put(`/cart/add_quantity_cart_item/${item.product.name}`, {
+          .put("/cart/add_quantity_cart_item", {
             name: cookies.token,
+            product: item.product.name,
             quantity: method === "plus" ? 1 : -1,
           })
           .then(() => window.location.reload())
-      : handleRemoveItem(item);
+      : axios
+          .post("/cart/remove_cart_item", {
+            name: cookies.token,
+            product: item.product.name,
+          })
+          .then(() => window.location.reload());
   };
 
-  const handleCheckOut = () => {};
   return (
     <div className="cart text-darkgray w-[30%] shadow-slate-50 shadow-md fixed z-10 bg-white right-0 top-[140px]">
       <div className="flex bg-[#9C0010] px-3 py-3 text-white text-xl font-bold justify-between items-center">
@@ -42,11 +39,7 @@ export default function Cart(props) {
             className="flex px-5 py-3 justify-between items-center"
             key={index}
           >
-            <img
-              src="https://www.mk1642.com/getattachment/f2af6d3f-b7aa-40bd-8de1-e2ee113575de/4131.aspx"
-              width={70}
-              alt="food"
-            />
+            <img src={item.product.image_url} width={70} alt="food" />
             <h1 className="w-1/4">{item.product.name}</h1>
             <div className="flex items-center">
               <button
@@ -72,12 +65,14 @@ export default function Cart(props) {
         <p>{props.cart.total_cost === null ? 0 : props.cart.total_cost} .-</p>
       </div>
       <div className="flex px-4 py-3 justify-center items-center">
-        <button
-          className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-center"
-          onClick={handleCheckOut}
-        >
-          ✓ Checkout
-        </button>
+        {props.cart.amount > 0 && (
+          <button
+            className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-center"
+            onClick={props.handleCheckOut}
+          >
+            ✓ Checkout
+          </button>
+        )}
       </div>
     </div>
   );

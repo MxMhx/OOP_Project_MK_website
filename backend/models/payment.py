@@ -1,23 +1,19 @@
-import enum
-class payment :
-    def __init__(self,Status,Date_time,Transaction_id, order):
-        self.Status = Status
-        self.Date_time = Date_time
-        self.Transaction_id = Transaction_id
-        self.total_cost = order._Total_Cost
+class Payment :
+    def __init__(self, status, date_time, transaction_id, total_cost):
+        self.__status = status
+        self.__date_time = date_time
+        self.__transaction_id = transaction_id
+        self.__total_cost = total_cost
 
-class cash(payment) :
-    def __init__(self,Cash_Tendered) :
-        self.Cash_Tendered = Cash_Tendered
-    pass
+class Cash(Payment) :
+    def __init__(self, status, date_time, transaction_id, total_cost):
+        super().__init__(status, date_time, transaction_id, total_cost)
 
-class credit_debit_card(payment) :
-    def __init__(self,Card_number,Name,Cvv) :
-        self.Card_number = Card_number
-        self.Name = Name
-        self.Cvv = Cvv
-    pass
-
-# class PaymentStatus(enum) :
-#     UNPAID, COMPLETED, DECLINED, CANCELLED \
-#     = 1, 2, 3, 4
+class Credit_card(Payment) :
+    def __init__(self, status, date_time, transaction_id, total_cost, first_name, last_name, card_number, cvv, exp):
+        super().__init__(status, date_time, transaction_id, total_cost)
+        self.__first_name = first_name
+        self.__last_name = last_name
+        self.__card_number = card_number
+        self.__cvv = cvv
+        self.__exp = exp

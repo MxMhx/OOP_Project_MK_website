@@ -55,6 +55,7 @@ export default function Login() {
                 className="px-2 py-1 rounded-lg shadow-md w-full"
                 type="email"
                 placeholder="Ex. test@email.com"
+                autoFocus
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

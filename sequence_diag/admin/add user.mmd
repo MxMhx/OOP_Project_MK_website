@@ -1,0 +1,11 @@
+sequenceDiagram
+    title login
+    actor admin
+    participant system
+    participant user
+    participant category
+    admin ->> system: send name,email,password,phone,birthday
+    system ->> user:add user
+    user --> user : generate new user
+    user --> system: return new user
+    system --> user: return new user
