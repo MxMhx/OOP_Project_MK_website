@@ -1,0 +1,16 @@
+sequenceDiagram
+    title creat order
+    actor a
+    participant system 
+    participant user
+    participant user
+    a ->> system :send username 
+    system ->> user :get user(username)
+    system ->> order: build ubject order(address, total_cost,status,username_d)
+    order -> system: return(order)
+    order -> a: show order
+
+
+
+
+
