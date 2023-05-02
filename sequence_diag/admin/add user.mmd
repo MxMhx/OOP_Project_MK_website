@@ -3,7 +3,6 @@ sequenceDiagram
     actor admin
     participant system
     participant user
-    participant category
     admin ->> system: send name,email,password,phone,birthday
     system ->> user:add user
     user -->> user : create new user
