@@ -1,0 +1,8 @@
+sequenceDiagram
+    title read in Categories
+    participant system
+    participant Market
+
+    User ->> System: Send GET request to "/"
+    system ->> system: Retrieve all categories
+    System -->> User: Return categories

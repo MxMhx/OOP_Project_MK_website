@@ -1,0 +1,11 @@
+sequenceDiagram
+    title read in Categories
+    participant system
+    participant category
+    participant product
+
+    User ->> system: Send GET request to "/"
+    system ->> category: get category
+    category ->> product: get product
+    product -->> category: return product info 
+    product -->> system: return product info 

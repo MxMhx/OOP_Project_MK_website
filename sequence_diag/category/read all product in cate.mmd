@@ -1,0 +1,16 @@
+sequenceDiagram
+    title read All product
+    participant system
+    participant categories
+    participant Market
+
+    User ->> system: Send GET request to "/"
+    system ->> categories:get category
+    loop for each product
+        categories->>system: Retrieve product information
+        categories->>system: Send product information
+        categories->>system: Add product information to list
+    system ->> system: Retrieve all categories
+    system -->> User: Return categories
+
+
