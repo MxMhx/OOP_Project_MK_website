@@ -1,14 +1,14 @@
 sequenceDiagram
     title login
-    actor A
+    actor user
     participant system
     participant user
-    A -> system :insert email password
-    system -> user :get usert(email)
+    user ->> system :insert email password
+    system ->> user :get usert(email)
     alt user is none
-        userb-->>system: login fail
+        user-->>system: login fail
     alt user password wrong
         user -->> system : login fail
     else 
         user->>system: return user name
-    system --> A :login status
+    system --> user :login status
