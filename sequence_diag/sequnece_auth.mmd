@@ -11,7 +11,6 @@ sequenceDiagram
     user --> system: returen user data
     system --> A :return data
 
-
 sequenceDiagram
     title login
     actor A
@@ -20,11 +19,9 @@ sequenceDiagram
     A -> system :insert email password
     system -> user :get usert(email)
     alt user is none
-        userb->>system: login fail
+        userb-->>system: login fail
     alt user password wrong
-        user ->> system : login fail
+        user -->> system : login fail
     else 
         user->>system: return user name
-    system --> A :login success
-
-
+    system --> A :login status
