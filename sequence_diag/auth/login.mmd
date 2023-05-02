@@ -17,22 +17,3 @@ sequenceDiagram
 
 
 
-sequenceDiagram
-    title Login
-    actor use
-    participant Client
-    participant Server
-    Client->>Server: Request to login
-    Server->>Client: Prompt for email and password
-    Client->>Server: Send email and password
-    Server->>UserManager: Get user(email)
-    UserManager->>Server: Return user object
-    alt User is None
-        Server->>Client: Login Failed
-    else
-        alt Password is wrong
-            Server->>Client: Login Failed
-        else
-            Server->>Client: Return user name
-        end
-    end
