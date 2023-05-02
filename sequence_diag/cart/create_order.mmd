@@ -1,3 +1,4 @@
+
 sequenceDiagram
     title creat order
     actor a
@@ -10,16 +11,6 @@ sequenceDiagram
     order -> system: return(order)
     order -> a: show order
 
-sequenceDiagram
-    title add to cart
-    participant system 
-    participant cart
-    actor a 
-    a ->> system:return username
-    system ->> cart:get cart(username)
-    cart ->> cart: add cart item 
-    cart -->> system : return cart 
-    system --> a :show cart 
 
 
 
