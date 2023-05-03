@@ -10,5 +10,5 @@ sequenceDiagram
     Cart ->> Cart : increase queantity(productname,queatity)
     Cart -->> User :update cart 
     User -->> MkDelivery: Update User's Cart
-    MkDelivery --> user: show cart new quatity of item
+    MkDelivery -->> user: show cart new quatity of item
 

@@ -4,10 +4,9 @@ sequenceDiagram
     participant MkDelivery
     participant ProductCategory
 
-    user ->> system: click to see category'product
+    user ->> ProductCategory: click to see category's product
     MkDelivery ->> ProductCategory:get_category
     loop for product in category
         ProductCategory -->> MkDelivery: return category's products
-    MkDelivery -->> user: show all product in category
-
-
+    end
+    MkDelivery -->> user: show all products in category

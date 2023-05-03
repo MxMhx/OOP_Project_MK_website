@@ -7,11 +7,11 @@ sequenceDiagram
     participant CartItem
     user ->> MkDelivery :press button add product
     MkDelivery ->> User:get_user
-    User -> Cart: get_cart
-    Cart -> CartItem:get_cart_item 
-    CartItem -> CartItem :create cart item
-    CartItem --> Cart: return item in cart 
-    Cart --> User: update cart
-    User --> MkDelivery :update user's cart
-    MkDelivery --> user:show new cart
+    User ->> Cart: get_cart
+    Cart ->> CartItem:get_cart_item 
+    CartItem ->> CartItem :create cart item
+    CartItem -->> Cart: return item in cart 
+    Cart -->> User: update cart
+    User -->> MkDelivery :update user's cart
+    MkDelivery -->> user:show new cart
 
