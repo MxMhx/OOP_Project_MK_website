@@ -1,7 +1,7 @@
 sequenceDiagram
     title create order
     actor user
-    participant Cart
+  
     participant MkDelivery
     participant User
     participant Address
@@ -15,8 +15,8 @@ sequenceDiagram
     User ->> Cart :get_cart
     Cart ->> Cart: add more shipping cost
     Cart -->> User:return total user's totol cost
-    User ->> Oreder:add_order
-    Order ->> order :create new order 
+    User ->> Order:add_order
+    Order ->> Order :create new order 
     Order ->> User: return user's new order
     User -->> MkDelivery: return order
     MkDelivery -->> user:show order
