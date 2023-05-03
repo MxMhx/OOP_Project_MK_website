@@ -19,6 +19,14 @@ sequenceDiagram
     Order ->> Order :create new order 
     Order ->> User: return user's new order
     User -->> MkDelivery: return order
-    MkDelivery -->> user:show order
+
+    MkDelivery ->> User:get_user
+    User ->> Cart :get_cart
     Cart ->> Cart :clear_cart
+    Cart -->> User :update empty cart
+    User -->> MkDelivery:update user's car
+    MkDelivery -->> user:show order
+
+    
+    
     
