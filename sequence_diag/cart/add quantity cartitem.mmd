@@ -4,7 +4,6 @@ sequenceDiagram
     participant MkDelivery
     participant User
     participant Cart 
-    participant CartItem
     user ->> MkDelivery:click to add quantity
     MkDelivery ->> User :insert quantity of cart item
     User ->> Cart : get cart 
