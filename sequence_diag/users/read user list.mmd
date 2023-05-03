@@ -1,9 +1,16 @@
 sequenceDiagram
     title read user list 
-    participant system
-    participant user
-   
-    system ->> system:get all user list
+    actor user
+    participant MkDelivery
+    participant User
+    participant Account
+
+    user ->> MkDelivery:see all user
+    MkDelivery ->> MkDelivery:get_all_user
+    MkDelivery -->> user:show all user
+    
+
+
     
 
     

@@ -1,0 +1,15 @@
+sequenceDiagram
+    title edit profile 
+    actor user
+    participant MkDelivery
+    participant User
+    participant Account
+   
+    user ->> MkDelivery:insert name, phone, birthday, address for edit profile 
+    MkDelivery ->> User:get_user
+    User ->> User :edit_profile(name, phone, birthday, address)
+    User -->> MkDelivery:update new profile 
+    MkDelivery --> user:show new profile 
+
+    
+    

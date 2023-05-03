@@ -1,9 +1,15 @@
 sequenceDiagram
     title get current user
-    participant system
-    participant user
+    actor user
+    participant MkDelivery
+    participant User
+    participant Account
    
-    system ->> user:get user(username)
-    user -->> system :return user
+    user ->> MkDelivery:click to user
+    MkDelivery ->> User:get_user
+    User ->> Account:get_account
+    Account -->> User :return user's accout
+    User -->> MkDelivery:return User
 
+    
     
