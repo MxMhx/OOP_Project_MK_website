@@ -1,16 +1,13 @@
 sequenceDiagram
-    title read All product
-    participant system
-    participant categories
-    participant Market
+    title read all product in category
+    actor user
+    participant MkDelivery
+    participant ProductCategory
 
-    User ->> system: Send GET request to "/"
-    system ->> categories:get category
-    loop for each product
-        categories->>system: Retrieve product information
-        categories->>system: Send product information
-        categories->>system: Add product information to list
-    system ->> system: Retrieve all categories
-    system -->> User: Return categories
+    user ->> system: click to see category'product
+    MkDelivery ->> ProductCategory:get_category
+    loop for product in category
+        ProductCategory -->> MkDelivery: return category's products
+    MkDelivery -->> user: show all product in category
 
 

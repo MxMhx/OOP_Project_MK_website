@@ -1,8 +1,9 @@
 sequenceDiagram
-    title read in Categories
-    participant system
-    participant Market
+    title read category list
+    actor user
+    participant MkDelivery
 
-    User ->> System: Send GET request to "/"
-    system ->> system: Retrieve all categories
-    System -->> User: Return categories
+    user ->> MkDelivery: click to see category
+    MkDelivery ->> MkDelivery:get category list
+    MkDelivery -->> user: show all category
+
