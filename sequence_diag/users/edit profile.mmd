@@ -3,7 +3,7 @@ sequenceDiagram
     actor user
     participant MkDelivery
     participant User
-    participant Account
+
    
     user ->> MkDelivery:insert name, phone, birthday, address for edit profile 
     MkDelivery ->> User:get_user

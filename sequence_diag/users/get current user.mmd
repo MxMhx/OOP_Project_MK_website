@@ -10,6 +10,7 @@ sequenceDiagram
     User ->> Account:get_account
     Account -->> User :return user's accout
     User -->> MkDelivery:return User
+    MkDelivery -->> user:display user
 
     
     
