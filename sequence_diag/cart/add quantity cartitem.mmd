@@ -1,12 +1,15 @@
 sequenceDiagram
-    title add quantity cart item
-    actor use 
-    participant system
-    participant user
-    participant cart 
-    system ->> user :get user(username) 
-    user ->> cart : get cart 
-    cart ->> cart : increase quantity(productname,queatity)
-    cart -->> user :update cart 
-    user -->> system: Update User's Cart
+    title add quantity product
+    actor user 
+    participant MkDelivery
+    participant User
+    participant Cart 
+    participant CartItem
+    user ->> MkDelivery:click to add quantity
+    MkDelivery ->> User :insert quantity of cart item
+    User ->> Cart : get cart 
+    Cart ->> Cart : increase queantity(productname,queatity)
+    Cart -->> User :update cart 
+    User -->> MkDelivery: Update User's Cart
+    MkDelivery --> user: show cart new quatity of item
 
