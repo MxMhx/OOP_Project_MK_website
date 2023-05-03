@@ -11,8 +11,8 @@ sequenceDiagram
     Account ->> Account : create new account
     Account -->> Customer :return account
     Customer -->> Customer :create new user
-    Customer --> MkDelivery: update user list
-    MkDelivery --> user :show new user
+    Customer -->> MkDelivery: update user list
+    MkDelivery -->> user :show new user
 
 
 
