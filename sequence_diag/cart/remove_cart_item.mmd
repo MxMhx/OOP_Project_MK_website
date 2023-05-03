@@ -10,4 +10,4 @@ sequenceDiagram
     Cart ->> Cart : remove_cart_item
     Cart -->> User :update cart 
     User -->> MkDelivery: Update User's Cart
-    MkDelivery --> user: show cart
+    MkDelivery -->> user: show cart
