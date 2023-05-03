@@ -1,0 +1,13 @@
+sequenceDiagram
+    title get order
+    actor user
+    participant MkDelivery
+    participant User
+    participant Order
+
+    user ->> MkDelivery:click to see order 
+    MkDelivery ->> User : get_user
+    User ->> Order :get_order
+    Order -->> User:return order
+    User -->> MkDelivery:return user's order
+    MkDelivery -->> user: show order

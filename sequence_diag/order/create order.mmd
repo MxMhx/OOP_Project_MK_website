@@ -1,0 +1,24 @@
+sequenceDiagram
+    title create order
+    actor user
+    participant Cart
+    participant MkDelivery
+    participant User
+    participant Address
+    participant Cart
+    participant Order
+
+    user ->> MkDelivery:click to create order
+    MkDelivery ->> User:get_user
+    User ->> Address :get_address
+    Address -->> User:return user's address 
+    User ->> Cart :get_cart
+    Cart ->> Cart: add more shipping cost
+    Cart -->> User:return total user's totol cost
+    User ->> Oreder:add_order
+    Order ->> order :create new order 
+    Order ->> User: return user's new order
+    User -->> MkDelivery: return order
+    MkDelivery -->> user:show order
+    Cart ->> Cart :clear_cart
+    
