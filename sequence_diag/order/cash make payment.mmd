@@ -1,0 +1,21 @@
+ sequenceDiagram
+    title cash make payment 
+    actor user
+  
+    participant MkDelivery
+    participant User
+    participant Order
+    participant Cash
+
+    user ->> MkDelivery:clike cash payment
+    MkDelivery ->> User: get_uer
+    User ->> Order:get_order
+    Order ->> Cash:make_payment
+    Cash ->> Cash :create cash payment
+    Cash -->> Order: return order payment
+    Order -->> User: return payment
+    User -->> MkDelivery:return user's payment
+    MkDelivery -->> user: show payment
+    
+
+

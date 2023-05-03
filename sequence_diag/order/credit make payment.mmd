@@ -1,0 +1,21 @@
+ sequenceDiagram
+    title credit make payment 
+    actor user
+  
+    participant MkDelivery
+    participant User
+    participant Order
+    participant CreditCart
+
+    user ->> MkDelivery:type credit card info
+    MkDelivery ->> User: get_uer
+    User ->> Order:get_order
+    Order ->> CreditCart:make_payment
+    CreditCart ->> CreditCart :create cash payment
+    CreditCart -->> Order: return order payment
+    Order -->> User: return payment
+    User -->> MkDelivery:return user's payment
+    MkDelivery -->> user: show payment
+    
+
+
