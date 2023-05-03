@@ -4,9 +4,9 @@ sequenceDiagram
     participant MkDelivery
     participant User
     participant Cart 
-    user ->> MkDelivery:click to add quantity
-    MkDelivery ->> User :insert quantity of cart item
-    User ->> Cart : get cart 
+    user ->> MkDelivery:insert quantity of cart item
+    MkDelivery ->> User :get_user
+    User ->> Cart : get_cart 
     Cart ->> Cart : increase queantity(productname,queatity)
     Cart -->> User :update cart 
     User -->> MkDelivery: Update User's Cart

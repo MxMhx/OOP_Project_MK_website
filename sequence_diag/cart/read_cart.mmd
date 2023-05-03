@@ -1,0 +1,19 @@
+sequenceDiagram
+    title add to cart
+    actor user 
+    participant MkDelivery
+    participant User
+    participant Cart 
+    
+    user ->> MkDelivery :click to see user's cart
+    MkDelivery ->> User:get_user
+    User ->> Cart: get_cart
+    Cart -->> User: return cart
+    User -->> MkDelivery :return user's cart
+    MkDelivery -->> user:show user's cart
+ 
+
+
+
+
+

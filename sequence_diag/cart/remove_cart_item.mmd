@@ -1,14 +1,13 @@
 sequenceDiagram
-    title add_quantity_cart_item
-    actor a 
-    participant system
-    participant user
-    participant cart 
-    system ->> user :get user(username) 
-    user ->> cart : get cart 
-    cart ->> cart : remove cart item(product name)
-    cart -->> user :update cart 
-    user -->> system: Update User's Cart
-
-
-
+    title remove product
+    actor user 
+    participant MkDelivery
+    participant User
+    participant Cart 
+    user ->> MkDelivery:click remove item in cart
+    MkDelivery ->> User :get_user
+    User ->> Cart : get_cart 
+    Cart ->> Cart : remove_cart_item
+    Cart -->> User :update cart 
+    User -->> MkDelivery: Update User's Cart
+    MkDelivery --> user: show cart
