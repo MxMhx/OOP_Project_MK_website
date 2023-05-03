@@ -1,11 +1,15 @@
 sequenceDiagram
-    title read in Categories
-    participant system
-    participant category
-    participant product
+    title read category list
+    actor user
+    participant MkDelivery
+    participant ProductCategory
+    participant Product
 
-    User ->> system: Send GET request to "/"
-    system ->> category: get category
-    category ->> product: get product
-    product -->> category: return product info 
-    product -->> system: return product info 
+    user ->> MkDelivery: click to see product info
+    MkDelivery ->> ProductCategory:get_category
+    ProductCategory ->> Product: get_product
+    Product -->> ProductCategory: return product info 
+    ProductCategory -->> MkDelivery:return product info
+    MkDelivery -->> user: show product info
+
+
