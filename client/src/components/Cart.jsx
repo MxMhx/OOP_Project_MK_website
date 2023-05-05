@@ -6,20 +6,21 @@ export default function Cart(props) {
   const { cookies } = useContext(AuthContext);
 
   const handleEditItem = async (item, method) => {
+    props.setIsEdit(true);
     item.quantity > 1 || method === "plus"
       ? axios
-          .put("/cart/add_quantity_cart_item", {
+          .put("/cart/edit_quantity_cart_item", {
             name: cookies.token,
             product: item.product.name,
             quantity: method === "plus" ? 1 : -1,
           })
-          .then(() => window.location.reload())
+          .then(() => props.setIsEdit(false))
       : axios
           .post("/cart/remove_cart_item", {
             name: cookies.token,
             product: item.product.name,
           })
-          .then(() => window.location.reload());
+          .then(() => props.setIsEdit(false));
   };
 
   return (
@@ -69,6 +70,7 @@ export default function Cart(props) {
           <button
             className="flex bg-red text-white px-4 py-2 rounded-md hover:shadow-md items-center justify-center"
             onClick={props.handleCheckOut}
+            disabled={props.isLoading}
           >
             ✓ Checkout
           </button>

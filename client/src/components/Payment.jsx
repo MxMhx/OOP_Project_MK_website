@@ -29,7 +29,7 @@ export default function Payment(props) {
       .post("/order/cash", {
         username: cookies.token,
         orderid: props.order._Order__id,
-        totalCost: props.order._total_Cost,
+        totalCost: props.order._Order__total_Cost,
       })
       .then(() => {
         setIsLoading(false);
@@ -45,7 +45,7 @@ export default function Payment(props) {
       .post("/order/credit", {
         username: cookies.token,
         orderid: props.order._Order__id,
-        totalCost: props.order._total_Cost,
+        totalCost: props.order._Order__total_Cost,
         firstname: firstname,
         lastname: lastname,
         cardNumber: cardNumber,
@@ -72,7 +72,7 @@ export default function Payment(props) {
       </div>
       <div className="flex justify-between w-1/3">
         <h1>Cost</h1>
-        <p>{props.order._total_Cost - 50} .-</p>
+        <p>{props.order._Order__total_Cost - 50} .-</p>
       </div>
       <div className="flex justify-between w-1/3">
         <h1>Shipping Cost</h1>
@@ -81,7 +81,7 @@ export default function Payment(props) {
       <div className="border w-1/3 my-3"></div>
       <div className="flex justify-between w-1/3 font-bold">
         <h1>Total Cost</h1>
-        <p>{props.order._total_Cost} .-</p>
+        <p>{props.order._Order__total_Cost} .-</p>
       </div>
       <h1 className="mt-4 font-bold text-2xl">Choose Yout Method</h1>
       <div className="flex">

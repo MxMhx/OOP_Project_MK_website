@@ -282,8 +282,8 @@ export const slideImages = [
     caption: "Slide 5",
   },
   {
-    url: "https://www.mk1642.com/getattachment/fe1a4a6d-3df8-48e4-a6fa-4738e0c9867e/3942.aspx",
-    surl: "https://www.mk1642.com/getattachment/1cf5f909-1d64-4315-b56b-584c908f1708/3942.aspx",
+    url: "https://www.mk1642.com/getattachment/afea8488-2ffa-4726-aefc-2961c2ba7261/4183.aspx",
+    surl: "https://www.mk1642.com/getattachment/94db6543-988d-42eb-a454-452d726f4b48/4183.aspx",
     caption: "Slide 6",
   },
   {

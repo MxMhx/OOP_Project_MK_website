@@ -42,7 +42,7 @@ export default function Register() {
           setYear("");
           window.location.replace("/login");
         })
-        .catch((err) => {
+        .catch(() => {
           setIsLoading(false);
         });
     } else {
@@ -300,7 +300,7 @@ export default function Register() {
               <input
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="password"
-                placeholder="ยืนยันรหัสผ่านใหม่"
+                placeholder="ยืนยันรหัสผ่าน"
                 value={comfirmPass}
                 onChange={(e) => setComfirmPass(e.target.value)}
               />

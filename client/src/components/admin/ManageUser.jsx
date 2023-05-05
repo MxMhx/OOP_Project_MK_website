@@ -8,6 +8,12 @@ export default function ManageUser(props) {
     axios.get("/user/list").then((res) => setUserList(res.data));
   }, []);
 
+  const handleRemoveUser = (username) => {
+    axios.delete("/removeuser", { params: { name: username } }).then((res) => {
+      window.location.reload();
+    });
+  };
+
   return (
     <div className="flex justify-center m-5">
       <div className="w-1/2 bg-gray rounded-b-xl p-4">
@@ -24,6 +30,7 @@ export default function ManageUser(props) {
                   <button
                     className="px-3 py-1 font-bold text-white bg-red rounded-full"
                     type="submit"
+                    onClick={() => handleRemoveUser(user._name)}
                   >
                     Remove
                   </button>
@@ -49,6 +56,35 @@ export default function ManageUser(props) {
 }
 
 export function AddUser(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAddUser = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    axios
+      .post("/adduser", {
+        name: name,
+        email: email,
+        password: password,
+        phone: phone,
+        birthday: birthday,
+      })
+      .then(() => {
+        props.close(false);
+        setIsLoading(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+        setBirthday("");
+      })
+      .catch(() => setIsLoading(false));
+  };
   return (
     <div
       className="fixed z-10 w-1/2 bg-white top-1/2 left-1/2 p-5 rounded-xl"
@@ -66,41 +102,47 @@ export function AddUser(props) {
         </h1>
       </div>
       <div className="w-full border border-gray rounded-lg my-2"></div>
-      <form>
+      <form onSubmit={(e) => handleAddUser(e)}>
         <input
           className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
           type="text"
           placeholder="Username"
           autoFocus
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
           type="text"
           placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
         <input
           className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
           type="text"
           placeholder="Birthday"
+          value={birthday}
+          onChange={(e) => setBirthday(e.target.value)}
         />
         <input
           className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
           type="email"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
-          type="text"
+          type="password"
           placeholder="Password"
-        />
-        <input
-          className="px-5 py-2 rounded-lg shadow-md w-full mb-5"
-          type="text"
-          placeholder="Address"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button
           className="w-full px-4 py-2 mt-3 font-bold text-white bg-red rounded-lg"
           type="submit"
+          disabled={isLoading}
         >
           Add New User
         </button>

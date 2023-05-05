@@ -49,12 +49,12 @@ export default function Profile() {
           </div>
           <div className="p-4">
             <h1>Email</h1>
-            <p className="text-red font-bold">{user[1]?.["_email"]}</p>
+            <p className="text-red font-bold">{user[1]?.["_Account__email"]}</p>
             <h1>Phone</h1>
             <p className="text-red font-bold">{user[0]?.["_phone"]}</p>
             <h1>Address</h1>
             <p className="text-red font-bold">
-              {user[0]?.["address"] == null ? "-" : user[0]?.["address"]}
+              {user[0]?.["_address"] == null ? "-" : user[0]?.["_address"]}
             </p>
             <h1>Birthday</h1>
             <p className="text-red font-bold">{user[0]?.["_birthday"]}</p>
@@ -156,6 +156,7 @@ function EditProfile(props) {
         <button
           className="w-full px-4 py-2 mt-3 font-bold text-white bg-red rounded-lg"
           type="submit"
+          disabled={isLoading}
         >
           Apply
         </button>

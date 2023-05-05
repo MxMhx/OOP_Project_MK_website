@@ -1,25 +1,27 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Cart from "../components/Cart";
 import axios from "axios";
 import AuthContext from "../context/auth";
 import Payment from "./Payment";
 
 function Header() {
-  var delivery = true;
+  const { isLogin, cookies, isAdmin } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [delivery, setDelivery] = useState(true);
   const [cart, setCart] = useState([]);
   const [order, setOrder] = useState([]);
-  const showCart = () => setShow(true);
-  const hideCart = () => setShow(false);
-  const { isLogin, cookies, isAdmin } = useContext(AuthContext);
+  const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [payment, setPayment] = useState(false);
+
+  const showCart = useCallback(() => setShow(true), []);
+  const hideCart = useCallback(() => setShow(false), []);
 
   useEffect(() => {
     axios
       .get("/cart/get", { params: { name: cookies.token } })
       .then((res) => setCart(res.data));
-  }, [isLoading]);
+  }, [isEdit]);
 
   const handleCheckOut = () => {
     setIsLoading(true);
@@ -103,7 +105,7 @@ function Header() {
             ) : (
               <select
                 name="โปรดเลือกสาขา"
-                className="bg-[#9C0010] w-1/3 text-xs"
+                className="bg-[#9C0010] w-1/3 text-xs rounded-lg p-2"
               >
                 <option value="01">ลาดกระบัง</option>
               </select>
@@ -148,6 +150,8 @@ function Header() {
           handleClose={hideCart}
           cart={cart}
           handleCheckOut={handleCheckOut}
+          isLoading={isLoading}
+          setIsEdit={setIsEdit}
         />
       )}
       {payment && <Payment handleClose={setPayment} order={order} />}
@@ -157,14 +161,14 @@ function Header() {
   function leftClick() {
     var btn = document.getElementById("btnn");
     btn.style.left = "0";
-    delivery = true;
+    setDelivery(true);
   }
 
   function rightClick() {
     var btn = document.getElementById("btnn");
     btn.style.left = "50%";
-    delivery = false;
+    setDelivery(false);
   }
 }
 
-export default Header;
+export default React.memo(Header);

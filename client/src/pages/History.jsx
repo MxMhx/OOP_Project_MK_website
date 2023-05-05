@@ -12,7 +12,7 @@ export default function History() {
       .get("/order/all_order", { params: { name: cookies.token } })
       .then((res) => setOrderList(res.data))
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [cookies.token]);
 
   return (
     <div className="font-kanit">
@@ -29,11 +29,11 @@ export default function History() {
                 </div>
                 <div>
                   <h1 className="font-bold">Total Cost</h1>
-                  <p>{order._total_Cost} .-</p>
+                  <p>{order._Order__total_Cost} .-</p>
                 </div>
                 <div>
                   <h1 className="font-bold">Date</h1>
-                  <p>{order._payment?.["_Payment__date_time"]}</p>
+                  <p>{order._Order__payment?.["_Payment__date_time"]}</p>
                 </div>
               </div>
             );
