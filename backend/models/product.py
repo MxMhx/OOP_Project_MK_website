@@ -1,4 +1,3 @@
-import jsons
 class ProductCategory():
     def __init__(self, name, image_url):
         self.name = name
