@@ -7,7 +7,8 @@ star react web app
 
 - npm run build
 - fontend url: https://oop-mk-delivery.netlify.app/
-  start fast api
+
+start fast api
 
 - cd backend
 - uvicorn main:app --reload
