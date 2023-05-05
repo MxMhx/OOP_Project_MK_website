@@ -21,7 +21,7 @@ function Header() {
     axios
       .get("/cart/get", { params: { name: cookies.token } })
       .then((res) => setCart(res.data));
-  }, [isEdit]);
+  }, [isEdit, cookies.token]);
 
   const handleCheckOut = () => {
     setIsLoading(true);
