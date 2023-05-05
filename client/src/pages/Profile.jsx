@@ -3,7 +3,7 @@ import FilterBar from "../components/Filter";
 import axios from "axios";
 import AuthContext from "../context/auth";
 
-export default function Profile() {
+const Profile = () => {
   const { cookies, removeCookies } = useContext(AuthContext);
   const [user, setUser] = useState({});
   const [editProfile, setEditProfile] = useState(false);
@@ -72,7 +72,9 @@ export default function Profile() {
       {editProfile && <EditProfile close={setEditProfile} />}
     </div>
   );
-}
+};
+
+export default Profile;
 
 function EditProfile(props) {
   const { cookies, setCookies } = useContext(AuthContext);

@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import FilterBar from "../components/Filter";
 import axios from "axios";
 import AuthContext from "../context/auth";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState("");
@@ -87,15 +89,19 @@ export default function Login() {
             >
               ลืมรหัสผ่าน?
             </a>
-            <a
+            <p
               className="text-red hover:text-third-color text-sm float-right"
-              href="/registor"
+              onClick={() => {
+                navigate("/registor");
+              }}
             >
               สร้างบัญชี
-            </a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Login;

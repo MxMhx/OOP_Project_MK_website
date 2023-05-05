@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import axios from "axios";
 import AuthContext from "../context/auth";
 import Payment from "./Payment";
 
 function Header() {
+  const navigate = useNavigate();
   const { isLogin, cookies, isAdmin } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [delivery, setDelivery] = useState(true);
@@ -114,14 +116,31 @@ function Header() {
           <div className="">
             {isLogin ? (
               isAdmin ? (
-                <a href="/admin">admin</a>
+                <p
+                  onClick={() => {
+                    navigate("/admin");
+                  }}
+                >
+                  admin
+                </p>
               ) : (
-                <a href="/profile">profile</a>
+                <p
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  profile
+                </p>
               )
             ) : (
-              <a href="/login" className="hidden lg:block text-sm">
+              <p
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="hidden lg:block text-sm"
+              >
                 เข้าสู่ระบบ/ลงทะเบียน
-              </a>
+              </p>
             )}
             <div
               className="lg:flex items-center justify-end mt-1 hover:cursor-pointer"

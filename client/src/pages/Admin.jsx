@@ -5,7 +5,7 @@ import AddProductForm from "../components/admin/addProduct";
 import ManageUser, { AddUser } from "../components/admin/ManageUser";
 import AuthContext from "../context/auth";
 
-export default function Admin() {
+const Admin = () => {
   const [select, setSelect] = useState(1);
   const [showAddUser, setShowAddUser] = useState(false);
   const { removeCookies } = useContext(AuthContext);
@@ -66,4 +66,6 @@ export default function Admin() {
       </div>
     </div>
   );
-}
+};
+
+export default Admin;

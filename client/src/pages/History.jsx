@@ -3,7 +3,7 @@ import FilterBar from "../components/Filter";
 import axios from "axios";
 import AuthContext from "../context/auth";
 
-export default function History() {
+const History = () => {
   const { cookies } = useContext(AuthContext);
   const [orderList, setOrderList] = useState([]);
 
@@ -42,4 +42,6 @@ export default function History() {
       </div>
     </div>
   );
-}
+};
+
+export default History;

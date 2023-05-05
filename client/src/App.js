@@ -9,8 +9,12 @@ import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/auth";
 import Admin from "./pages/Admin";
 import History from "./pages/History";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    document.title = "MK Delivery";
+  });
   return (
     <BrowserRouter>
       <AuthProvider>
