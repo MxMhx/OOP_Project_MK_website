@@ -2,24 +2,30 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function CategoryBar(props) {
+function CategoryBar(props) {
   const navigate = useNavigate();
   const [categorys, setCategorys] = useState();
   useEffect(() => {
-    axios.get("/category").then((res) => setCategorys(res.data));
+    const getCategorys = async () => {
+      const response = await axios.get("/category/");
+      setCategorys(response.data);
+    };
+    getCategorys();
   }, []);
+
+  const handleSubmit = (category) => {
+    navigate(`/${category.name}`);
+  };
+
   return (
     <div className="font-kanit">
       <div className="flex w-full justify-center relative">
         {categorys &&
           categorys.map((category, index) => {
-            const handleSubmit = (category) => {
-              navigate(`/${category.name}`);
-            };
             return (
               <div
                 key={index}
-                className="grid place-items-center px-10 py-2"
+                className="grid place-items-center px-10 py-2 cursor-pointer"
                 style={{
                   backgroundColor:
                     props.category === category.name && "#EEEEEE",
@@ -37,3 +43,5 @@ export default function CategoryBar(props) {
     </div>
   );
 }
+
+export default React.memo(CategoryBar);

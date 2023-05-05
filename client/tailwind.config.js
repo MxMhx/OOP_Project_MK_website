@@ -8,6 +8,7 @@ module.exports = {
       gray: "#EEEEEE",
       black: "#000000",
       darkgray: "#919191",
+      green: "#C0FFD7",
     },
     fontFamily: {
       kanit: "Kanit, sans-serif",

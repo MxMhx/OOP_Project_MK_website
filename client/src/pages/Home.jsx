@@ -13,28 +13,30 @@ function Home() {
   }, []);
 
   const Slideshow = () => {
+    const renderSlideImage = (slideImage, index) => {
+      return (
+        <div key={index}>
+          <div className="items-center justify-center bg-cover hidden md:flex">
+            <img
+              src={slideImage.url}
+              className="w-full"
+              alt={slideImage.caption}
+            />
+          </div>
+          <div className="flex items-center justify-center bg-cover md:hidden">
+            <img
+              src={slideImage.surl}
+              className="w-full"
+              alt={slideImage.caption}
+            />
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div className="slide-container">
-        <Slide>
-          {slideImages.map((slideImage, index) => (
-            <div key={index}>
-              <div className="items-center justify-center bg-cover hidden md:flex">
-                <img
-                  src={slideImage.url}
-                  className="w-full h-auto"
-                  alt={slideImage.caption}
-                />
-              </div>
-              <div className="flex items-center justify-center bg-cover md:hidden">
-                <img
-                  src={slideImage.surl}
-                  className="w-full h-auto"
-                  alt={slideImage.caption}
-                />
-              </div>
-            </div>
-          ))}
-        </Slide>
+        <Slide>{slideImages.map(renderSlideImage)}</Slide>
       </div>
     );
   };
@@ -69,4 +71,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default React.memo(Home);
