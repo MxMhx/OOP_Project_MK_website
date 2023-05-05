@@ -1,5 +1,4 @@
-from fastapi import APIRouter, HTTPException
-from models.order import Order
+from fastapi import APIRouter
 import sys
 
 sys.path.append('/backend/')
@@ -9,8 +8,6 @@ router = APIRouter(prefix="/cart", tags=['cart'])
 
 @router.get("/get")
 def read_cart(name: str):
-    if not name:
-        raise HTTPException(status_code=422, detail="not found")
     
     return mk.get_user(name).get_cart()
 
