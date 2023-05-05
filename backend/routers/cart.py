@@ -20,15 +20,19 @@ async def add_to_cart(data: dict):
     category_d = data["category"]
     product_d = data["product"]
     quantity_d = data["quantity"]
-    mk.get_user(name_d).get_cart().add_cart_item(mk.get_category(category_d).get_product(product_d), quantity_d)
-    return mk.get_user(name_d).get_cart().get_cart_item(product_d)
+    cart = mk.get_user(name_d).get_cart()
+    if cart.get_cart_item(product_d) != None:
+        cart.edit_quantity(product_d, quantity_d)
+    else:
+        cart.add_cart_item(mk.get_category(category_d).get_product(product_d), quantity_d)
+    return cart.get_cart_item(product_d)
 
-@router.put("/add_quantity_cart_item")
-async def add_quantity_product(data: dict):
+@router.put("/edit_quantity_cart_item")
+async def edit_quantity_product(data: dict):
     name_d = data["name"]
     product_d = data["product"]
     quantity_d = data["quantity"]
-    mk.get_user(name_d).get_cart().increase_quantity(product_d, quantity_d)
+    mk.get_user(name_d).get_cart().edit_quantity(product_d, quantity_d)
 
     return mk.get_user(name_d).get_cart()
 

@@ -62,7 +62,7 @@ class Cart():
         for item in self.cart_items:
             self.total_cost += item.sub_cost
 
-    def increase_quantity(self, name, quantity):
+    def edit_quantity(self, name, quantity):
         for item in self.cart_items:
             if item.product.name == name:
                 item.quantity += quantity

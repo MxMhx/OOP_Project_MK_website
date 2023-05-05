@@ -27,7 +27,7 @@ async def create_order(data: dict):
     total_cost += 50 # add shipping cost
 
     order = Order(address, total_cost, "Pending")
-    user.add_order(order)
+    user.create_order(order)
     cart.clear_cart()
 
     return order

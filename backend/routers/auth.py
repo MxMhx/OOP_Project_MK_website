@@ -27,7 +27,7 @@ async def register(data: dict)->dict:
 def login(data: dict):
     email_d = data["email"]
     password_d = data["password"]
-    user = mk.get_user(email_d)
+    user = mk.get_user_email(email_d)
     if user is None: return {"status":"Login Failed"}
     if user.get_account().get_password() != password_d: return {"status":"Login Failed"}
     else:

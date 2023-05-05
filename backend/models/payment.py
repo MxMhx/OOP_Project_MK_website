@@ -9,7 +9,7 @@ class Cash(Payment) :
     def __init__(self, status, date_time, transaction_id, total_cost):
         super().__init__(status, date_time, transaction_id, total_cost)
 
-class Credit_card(Payment) :
+class Credit_card(Payment):
     def __init__(self, status, date_time, transaction_id, total_cost, first_name, last_name, card_number, cvv, exp):
         super().__init__(status, date_time, transaction_id, total_cost)
         self.__first_name = first_name

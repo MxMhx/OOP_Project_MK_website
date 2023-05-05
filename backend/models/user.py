@@ -3,16 +3,15 @@ from enum import Enum
 from .payment import *
 
 class Account:
-    def __init__(self, email, password, status = "ACTIVE"):
-        self._email = email
-        self._password = password
-        self._status = status
+    def __init__(self, email, password):
+        self.__email = email
+        self.__password = password
 
     def get_email(self):
-        return(self._email)
+        return(self.__email)
     
     def get_password(self):
-        return(self._password)
+        return(self.__password)
         
 
 class AccountStatus(Enum):
@@ -54,30 +53,24 @@ class User:
             if order._Order__id == id:
                 return order
     
-    def add_order(self, order):
+    def create_order(self, order):
         self.__order.append(order)
 
 
 class Customer(User):
     def __init__(self, name, phone, birthday, account, address = None, role = "customer"):
         super().__init__(name, phone, birthday, account, role)
-        self.address = address
+        self._address = address
 
     def get_address(self):
-        return self.address
+        return self._address
     
     def edit_profile(self, name, phone, birthday, address):
         if name != "": self._name = name
         if phone != "": self._phone = phone
         if birthday != "": self._birthday = birthday
-        if address != "": self.address = address
+        if address != "": self._address = address
 
 class Admin(User):
     def __init__(self, name, phone, birthday, account, role = "admin"):
         super().__init__(name, phone, birthday, account, role)
-
-    def add_product():
-        pass
-
-    def delete_product():
-        pass

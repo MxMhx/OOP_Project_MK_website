@@ -3,23 +3,12 @@ class MkDelivery():
     def __init__(self):
         self.__user_list = []
         self.__category_list = []
-        self.__location_list = []
 
     def add_user(self, user):
         self.__user_list.append(user)
 
     def add_category(self, category):
         self.__category_list.append(category)
-
-    def add_location(self, location):
-        self.__location_list.append(location)
-
-    def search_location(self, locate):
-        locations = []
-        for location in self.__location_list:
-            if locate in location:
-                locations.append(location)
-        return locations
 
     def get_all_category(self):
         return self.__category_list
@@ -33,12 +22,17 @@ class MkDelivery():
                 return p
     
     def get_user(self, name):
-        if "@" in name:
-            for u in self.__user_list:
-                if u.get_account().get_email() == name:
-                    return u
-        else:
-            for u in self.__user_list:
-                if u.get_name() == name:
-                    return u
+        for user in self.__user_list:
+            if user.get_name() == name:
+                return user
+                
+    def get_user_email(self, email):
+        for user in self.__user_list:
+            if user.get_account().get_email() == email:
+                return user
+            
+    def remove_user(self, name):
+        for user in self.__user_list:
+            if user.get_name() == name:
+                self.__user_list.remove(user)
         
