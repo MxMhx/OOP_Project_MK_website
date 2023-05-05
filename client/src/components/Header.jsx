@@ -1,21 +1,44 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import axios from "axios";
 import AuthContext from "../context/auth";
+import Payment from "./Payment";
 
 function Header() {
-  var delivery = true;
-  const [show, setShow] = useState(false);
-  const [cart, setCart] = useState([]);
-  const showCart = () => setShow(true);
-  const hideCart = () => setShow(false);
+  const navigate = useNavigate();
   const { isLogin, cookies, isAdmin } = useContext(AuthContext);
+  const [show, setShow] = useState(false);
+  const [delivery, setDelivery] = useState(true);
+  const [cart, setCart] = useState([]);
+  const [order, setOrder] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [payment, setPayment] = useState(false);
+
+  const showCart = useCallback(() => setShow(true), []);
+  const hideCart = useCallback(() => setShow(false), []);
 
   useEffect(() => {
     axios
       .get("/cart/get", { params: { name: cookies.token } })
       .then((res) => setCart(res.data));
-  }, [cookies]);
+  }, [isEdit, cookies.token]);
+
+  const handleCheckOut = () => {
+    setIsLoading(true);
+    axios
+      .post("/order/create_order", { username: cookies.token })
+      .then((res) => {
+        setIsLoading(false);
+        hideCart();
+        setPayment(true);
+        setOrder(res.data);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div className="text-white font-kanit">
@@ -84,7 +107,7 @@ function Header() {
             ) : (
               <select
                 name="โปรดเลือกสาขา"
-                className="bg-[#9C0010] w-1/3 text-xs"
+                className="bg-[#9C0010] w-1/3 text-xs rounded-lg p-2"
               >
                 <option value="01">ลาดกระบัง</option>
               </select>
@@ -93,14 +116,31 @@ function Header() {
           <div className="">
             {isLogin ? (
               isAdmin ? (
-                <a href="/admin">admin</a>
+                <p
+                  onClick={() => {
+                    navigate("/admin");
+                  }}
+                >
+                  admin
+                </p>
               ) : (
-                <a href="/profile">profile</a>
+                <p
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  profile
+                </p>
               )
             ) : (
-              <a href="/login" className="hidden lg:block text-sm">
+              <p
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="hidden lg:block text-sm"
+              >
                 เข้าสู่ระบบ/ลงทะเบียน
-              </a>
+              </p>
             )}
             <div
               className="lg:flex items-center justify-end mt-1 hover:cursor-pointer"
@@ -124,21 +164,30 @@ function Header() {
           </div>
         </div>
       </div>
-      {show && <Cart show={show} handleClose={hideCart} cart={cart} />}
+      {show && (
+        <Cart
+          handleClose={hideCart}
+          cart={cart}
+          handleCheckOut={handleCheckOut}
+          isLoading={isLoading}
+          setIsEdit={setIsEdit}
+        />
+      )}
+      {payment && <Payment handleClose={setPayment} order={order} />}
     </div>
   );
 
   function leftClick() {
     var btn = document.getElementById("btnn");
     btn.style.left = "0";
-    delivery = true;
+    setDelivery(true);
   }
 
   function rightClick() {
     var btn = document.getElementById("btnn");
     btn.style.left = "50%";
-    delivery = false;
+    setDelivery(false);
   }
 }
 
-export default Header;
+export default React.memo(Header);

@@ -1,4 +1,3 @@
-import jsons
 class ProductCategory():
     def __init__(self, name, image_url):
         self.name = name
@@ -45,7 +44,6 @@ class Cart():
         self.amount = 0
         self.cart_items = []
         self.total_cost = 0
-        self.shipping_cost = 0
     
     def add_cart_item(self, product, quantity):
         cart_item = Cart_item(product, quantity, product.price * quantity)
@@ -63,7 +61,7 @@ class Cart():
         for item in self.cart_items:
             self.total_cost += item.sub_cost
 
-    def increase_quantity(self, name, quantity):
+    def edit_quantity(self, name, quantity):
         for item in self.cart_items:
             if item.product.name == name:
                 item.quantity += quantity
@@ -76,3 +74,8 @@ class Cart():
                 self.cart_items.remove(item)
         self.calculate_cost()
         self.amount = len(self.cart_items)
+
+    def clear_cart(self):
+        self.amount = 0
+        self.cart_items = []
+        self.total_cost = 0

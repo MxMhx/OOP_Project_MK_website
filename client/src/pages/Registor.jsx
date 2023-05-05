@@ -2,7 +2,7 @@ import axios from "axios";
 import FilterBar from "../components/Filter";
 import { useState } from "react";
 
-export default function Register() {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,11 +10,15 @@ export default function Register() {
   const [isInvalid, setIsInvalid] = useState(false);
   const [phone, setPhone] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setBirthday(date + "-" + month + "-" + year);
     if (password === comfirmPass) {
       axios
         .post("/auth/register", {
@@ -33,9 +37,12 @@ export default function Register() {
           setComfirmPass("");
           setPhone("");
           setBirthday("");
+          setDate("");
+          setMonth("");
+          setYear("");
           window.location.replace("/login");
         })
-        .catch((err) => {
+        .catch(() => {
           setIsLoading(false);
         });
     } else {
@@ -55,6 +62,7 @@ export default function Register() {
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="text"
                 placeholder="ชื่อ"
+                autoFocus
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -88,6 +96,8 @@ export default function Register() {
               <select
                 name="month"
                 className="px-2 py-1 rounded-lg shadow-md mx-2"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
               >
                 <option value="01">January</option>
                 <option value="02">February</option>
@@ -105,6 +115,8 @@ export default function Register() {
               <select
                 name="day"
                 className="px-2 py-1 rounded-lg shadow-md mx-2"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
               >
                 <option value="01">1</option>
                 <option value="02">2</option>
@@ -141,6 +153,8 @@ export default function Register() {
               <select
                 name="year"
                 className="px-2 py-1 rounded-lg shadow-md mx-2"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
               >
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
@@ -286,7 +300,7 @@ export default function Register() {
               <input
                 className="px-2 py-1 rounded-lg shadow-md"
                 type="password"
-                placeholder="ยืนยันรหัสผ่านใหม่"
+                placeholder="ยืนยันรหัสผ่าน"
                 value={comfirmPass}
                 onChange={(e) => setComfirmPass(e.target.value)}
               />
@@ -306,4 +320,6 @@ export default function Register() {
       </div>
     </div>
   );
-}
+};
+
+export default Register;
