@@ -7,10 +7,12 @@ sequenceDiagram
    
     user ->> MkDelivery:click to user
     MkDelivery ->> User:get_user
-    User ->> Account:get_account
-    Account -->> User :return user's accout
     User -->> MkDelivery:return User
-    MkDelivery -->> user:display user
+    MkDelivery ->> User:get_user
+    User ->> Account:get_account
+    Account -->> User:return accunt
+    User -->> MkDelivery:return account
+    MkDelivery -->> user:show user and account
 
     
     
