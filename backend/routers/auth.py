@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from models.user import Customer, Account
 import sys
-import jsons
 sys.path.append('/backend/')
 from data import mk
 
